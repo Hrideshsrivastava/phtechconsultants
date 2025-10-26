@@ -66,7 +66,7 @@ function App() {
     onSwipedLeft: () => handleSwipe('LEFT'),
     onSwipedRight: () => handleSwipe('RIGHT'),
     preventScrollOnSwipe: true, // Prevents vertical scroll while swiping
-    trackMouse: true,          // Don't allow swiping with a mouse
+    trackMouse: false,          // Don't allow swiping with a mouse
     // 6. Disable the hook entirely if not on mobile
     disabled: !isMobile,
   });
@@ -88,7 +88,7 @@ function App() {
   };
 
   return (
-    <div className="font-sans">
+    <div className="font-sans"{...swipeHandlers}>
       {/*
         1. Pass the setter function `setActivePage` as a prop.
         2. Pass the current `activePage` to highlight the active link.
@@ -99,7 +99,8 @@ function App() {
       />
 
       {/* Content area: pt-20 to avoid navbar overlap */}
-      <main className="pt-20 p-8"{...swipeHandlers}>
+      <main className="pt-20 p-8">
+        {isMobile && <p>this is working!!</p>}
         {/* 3. Render the component based on the state */}
         {renderActivePage()}
       </main>

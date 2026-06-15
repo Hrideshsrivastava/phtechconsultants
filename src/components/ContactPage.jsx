@@ -54,14 +54,7 @@ const ContactPage = () => (
                 </div>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-slate-100 flex justify-center space-x-6">
-                <a href="https://in.linkedin.com/in/vivekksindia/" target="_blank" rel="noreferrer" className="text-blue-900 hover:text-blue-700 font-bold flex items-center transition-colors">
-                    Connect on LinkedIn
-                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                    </svg>
-                </a>
-            </div>
+
         </SectionReveal>
     </div>
 );

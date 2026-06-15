@@ -1,118 +1,114 @@
-import React, { useState } from 'react';
-import ExpandingNavbar from './components/ExpandingNavbar';
-
-
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
-import { useIsMobile } from './hooks/useIsMobile';
 
-// --- Dummy Page Components (for this example) ---
-// In a real app, you would import these from separate files.
-const HomePage = () => (
-  <div className="p-4 bg-gray-100 rounded-lg">
-    <h2 className="text-2xl font-bold">Home Page</h2>
-    <p>Welcome to the home page content!</p>
-  </div>
-);
+import Layout from './components/Layout';
+import Footer from './components/Footer'; // New import
 
-const AboutPage = () => (
-  <div className="p-4 bg-gray-100 rounded-lg">
-    <h2 className="text-2xl font-bold">About Us</h2>
-    <p>This is the about section.</p>
-  </div>
-);
+// Main Corporate Pages
+import HomePage from './components/HomePage';
+import ServicesPage from './components/ServicesPage';
+import TrainingPage from './components/TrainingPage'; // New import
+import SimulationPage from './components/SimulationPage'; // New import
+import ProductsPage from './components/ProductsPage'; // New import
+import TrainersPage from './components/TrainersPage'; // New import
+import EventsPage from './components/EventsPage'; // New import
+import ContactPage from './components/ContactPage'; // New import
 
-const ServicesPage = () => (
-  <div className="p-4 bg-gray-100 rounded-lg">
-    <h2 className="text-2xl font-bold">Our Services</h2>
-    <p>Here are the services we offer.</p>
-  </div>
-);
+// Service Deep Links
+import HR_OD from './components/services/HR_OD';
+import SCM from './components/services/SCM';
+import IPA from './components/services/IPA';
+import PPM from './components/services/PPM';
+import MRBD from './components/services/MRBD';
 
-const ContactPage = () => (
-  <div className="p-4 bg-gray-100 rounded-lg">
-    <h2 className="text-2xl font-bold">Contact</h2>
-    <p>Get in touch with us!</p>
-  </div>
-);
-// --- End of Dummy Components ---
+// --- Scroll to top on route change ---
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    // Only scroll to top if not an intra-page navigation (like hash links if any existed)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname]);
+  return null;
+};
 
-const pages = ['home', 'about', 'services', 'contact'];
+// --- Top Level Routes for Swiping ---
+const topLevelRoutes = [
+  '/',
+  '/services',
+  '/training',
+  '/simulation',
+  '/products',
+  '/trainers',
+  '/events',
+  '/contact'
+];
 
-function App() {
-  // State to manage which page is currently active
-  
-  const [activePage, setActivePage] = useState(pages[0]);
+// --- Swipe Wrapper ---
+const SwipeableLayout = ({ children }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const isMobile = useIsMobile();
-
-
-
-  // 4. Create swipe handler functions
-  const handleSwipe = (direction) => {
-    const currentIndex = pages.indexOf(activePage);
-    
-    if (direction === 'LEFT') {
-      // Move to the next page, or wrap to the first
-      const nextIndex = (currentIndex + 1) % pages.length;
-      setActivePage(pages[nextIndex]);
-    } else if (direction === 'RIGHT') {
-      // Move to the previous page, or wrap to the last
-      const prevIndex = (currentIndex - 1 + pages.length) % pages.length;
-      setActivePage(pages[prevIndex]);
-    }
-  };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => handleSwipe('LEFT'),
-    onSwipedRight: () => handleSwipe('RIGHT'),
-    preventScrollOnSwipe: true, // Prevents vertical scroll while swiping
-    trackMouse: false,          // Don't allow swiping with a mouse
-    // 6. Disable the hook entirely if not on mobile
-    disabled: !isMobile,
+  const handlers = useSwipeable({
+    onSwipedLeft: () => {
+      const currentIndex = topLevelRoutes.indexOf(location.pathname);
+      if (currentIndex !== -1 && currentIndex < topLevelRoutes.length - 1) {
+        navigate(topLevelRoutes[currentIndex + 1]);
+      }
+    },
+    onSwipedRight: () => {
+      const currentIndex = topLevelRoutes.indexOf(location.pathname);
+      if (currentIndex > 0) {
+        navigate(topLevelRoutes[currentIndex - 1]);
+      }
+    },
+    preventScrollOnSwipe: false,
+    trackMouse: false
   });
 
-  // Function to render the correct page component based on state
-  const renderActivePage = () => {
-    switch (activePage) {
-      case 'home':
-        return <HomePage />;
-      case 'about':
-        return <AboutPage />;
-      case 'services':
-        return <ServicesPage />;
-      case 'contact':
-        return <ContactPage />;
-      default:
-        return <HomePage />;
-    }
-  };
-
   return (
-    <div className="font-sans"{...swipeHandlers}>
-      {/*
-        1. Pass the setter function `setActivePage` as a prop.
-        2. Pass the current `activePage` to highlight the active link.
-      */}
-      <ExpandingNavbar 
-        onNavClick={setActivePage} 
-        activePage={activePage}
-      />
-
-      {/* Content area: pt-20 to avoid navbar overlap */}
-      <main className="pt-20 p-8">
-        {isMobile && <p>this is working!!</p>}
-        {/* 3. Render the component based on the state */}
-        {renderActivePage()}
-      </main>
+    <div {...handlers} className="w-full h-full min-h-screen">
+      {children}
     </div>
+  );
+}; // This brace closes the SwipeableLayout component
+
+// --- Main App Component ---
+
+function App() {
+  return (
+    <Router>
+      <ScrollToTop />
+      <div className="w-full h-full">
+        <SwipeableLayout>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+
+              {/* Services (Consulting Only) */}
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/services/hr-od" element={<HR_OD />} />
+              <Route path="/services/scm" element={<SCM />} />
+              <Route path="/services/ipa" element={<IPA />} />
+              <Route path="/services/ppm" element={<PPM />} />
+              <Route path="/services/mrbd" element={<MRBD />} />
+
+              {/* Other Main Sections */}
+              <Route path="/training" element={<TrainingPage />} />
+              <Route path="/simulation" element={<SimulationPage />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/trainers" element={<TrainersPage />} />
+              <Route path="/events" element={<EventsPage />} />
+
+              <Route path="/contact" element={<ContactPage />} />
+
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Layout>
+        </SwipeableLayout>
+      </div>
+    </Router>
   );
 }
 
 export default App;
-
-
-
-
-
-
-

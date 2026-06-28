@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const ExpandingNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
-  const activePage = location.pathname;
+  const navigate = useNavigate();
 
   const navItems = [
-    { id: '', label: 'Home' },
+    { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
     { id: 'training', label: 'Training' },
     { id: 'simulation', label: 'Simulation' },
@@ -17,46 +18,86 @@ const ExpandingNavbar = () => {
     { id: 'contact', label: 'Contact' }
   ];
 
-  const handleNavClick = (path) => {
+  // Scroll spy effect
+  useEffect(() => {
+    // If not on the main page, don't spy
+    if (location.pathname.startsWith('/services/')) return;
+
+    const handleScroll = () => {
+      let current = 'home';
+      // Find the lowest section whose top is above the viewport middle
+      for (const item of navItems) {
+        const el = document.getElementById(item.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= window.innerHeight / 2) {
+            current = item.id;
+          }
+        }
+      }
+      if (activeSection !== current) {
+        setActiveSection(current);
+        // We can dynamically update the URL without triggering a re-render/jump
+        // window.history.replaceState(null, '', current === 'home' ? '/' : `/${current}`);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Init
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [activeSection, location.pathname]);
+
+  const handleNavClick = (e, item) => {
+    e.preventDefault();
     setIsMobileMenuOpen(false);
-    if (activePage === path) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (location.pathname.startsWith('/services/')) {
+        // We are on a deep link, navigate to home and then scroll
+        navigate(item.id === 'home' ? '/' : `/${item.id}`);
+        return;
+    }
+
+    const el = document.getElementById(item.id);
+    if (el) {
+      window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
     }
   };
 
   return (
-    <nav className="bg-white border-b border-slate-200 shadow-sm relative z-50">
+    <nav className="bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm relative z-50 transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex items-center">
             {/* Logo area */}
-            <Link
-              to="/"
+            <a
+              href="#home"
               className="flex-shrink-0 flex items-center cursor-pointer"
-              onClick={() => handleNavClick('/')}
+              onClick={(e) => handleNavClick(e, {id: 'home'})}
             >
               <span className="text-2xl font-extrabold text-blue-900 tracking-tight">PHTech</span>
               <span className="text-2xl font-medium text-slate-500 ml-1">Consultants</span>
-            </Link>
+            </a>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => {
-              const itemPath = `/${item.id}`;
-              const isActive = item.id === '' ? activePage === '/' : activePage.startsWith(itemPath);
+              // Highlight if we are in deep links and it's services
+              const isDeepLink = location.pathname.startsWith('/services/') && item.id === 'services';
+              const isActive = activeSection === item.id || isDeepLink;
+              
               return (
-                <Link
-                  key={item.id || 'home'}
-                  to={itemPath}
-                  onClick={() => handleNavClick(itemPath)}
-                  className={`text-sm font-semibold tracking-wide transition-colors duration-200 py-2 border-b-2 ${isActive
-                    ? 'border-blue-900 text-blue-900'
+                <a
+                  href={`#${item.id}`}
+                  key={item.id}
+                  onClick={(e) => handleNavClick(e, item)}
+                  className={`text-sm font-semibold tracking-wide transition-all duration-300 py-2 border-b-2 ${isActive
+                    ? 'border-blue-900 text-blue-900 scale-105'
                     : 'border-transparent text-slate-600 hover:text-blue-900 hover:border-slate-300'
                     }`}
                 >
                   {item.label}
-                </Link>
+                </a>
               );
             })}
           </div>
@@ -85,23 +126,24 @@ const ExpandingNavbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-200 shadow-md absolute w-full left-0 top-20">
+        <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md absolute w-full left-0 top-20">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => {
-              const itemPath = `/${item.id}`;
-              const isActive = item.id === '' ? activePage === '/' : activePage.startsWith(itemPath);
+              const isDeepLink = location.pathname.startsWith('/services/') && item.id === 'services';
+              const isActive = activeSection === item.id || isDeepLink;
+              
               return (
-                <Link
-                  key={item.id || 'home'}
-                  to={itemPath}
-                  onClick={() => handleNavClick(itemPath)}
-                  className={`block w-full text-left px-3 py-3 rounded-md text-base font-medium ${isActive
+                <a
+                  href={`#${item.id}`}
+                  key={item.id}
+                  onClick={(e) => handleNavClick(e, item)}
+                  className={`block w-full text-left px-3 py-3 rounded-md text-base font-medium transition-colors ${isActive
                     ? 'bg-blue-50 text-blue-900'
                     : 'text-slate-700 hover:bg-slate-50 hover:text-blue-900'
                     }`}
                 >
                   {item.label}
-                </Link>
+                </a>
               );
             })}
           </div>

@@ -11,7 +11,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="bg-blue-900 py-12 text-slate-200 mt-auto border-t border-blue-800">
+        <footer className="bg-blue-900 py-12 text-slate-200 mt-auto border-t border-blue-800 relative z-10">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <h3 className="text-xl font-bold text-white mb-4 tracking-tight">PHTech Consultants</h3>

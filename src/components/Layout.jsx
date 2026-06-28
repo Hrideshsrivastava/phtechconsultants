@@ -4,7 +4,7 @@ import Footer from './Footer';
 
 const Layout = ({ children, onNavClick, activePage }) => {
     return (
-        <div className="min-h-screen flex flex-col bg-slate-50 font-sans text-slate-800">
+        <div className="min-h-screen flex flex-col font-sans text-slate-800">
             {/* 
         Navbar wrapper ensures it stays fixed at the top with a high z-index.
         We pass the navigation props down to ExpandingNavbar.

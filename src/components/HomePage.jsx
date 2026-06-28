@@ -1,14 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionReveal from './SectionReveal';
+import ImageTrack from './ImageTrack';
 
 const HomePage = () => {
     return (
-        <div className="flex flex-col space-y-24 pb-12">
+        <div className="relative w-full">
+            <ImageTrack />
 
+            <div className="flex flex-col space-y-24 pb-12 relative z-10 pt-4">
             {/* 1. HERO - Strong & Sharpened */}
-            <section className="relative bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                <div className="absolute inset-0 bg-slate-50 opacity-50"></div>
+            <section className="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-slate-200/50 overflow-hidden">
+                <div className="absolute inset-0 bg-slate-50/50"></div>
                 <div className="relative px-6 py-16 md:px-8 md:py-20 lg:px-16 lg:py-24 text-center md:text-left flex flex-col md:flex-row items-center md:justify-between">
                     <div className="max-w-3xl">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-blue-900 tracking-tight leading-tight mb-6">
@@ -43,7 +46,7 @@ const HomePage = () => {
                 </SectionReveal>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                    <SectionReveal className="bg-white p-6 md:p-10 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow flex flex-col items-center text-center h-full">
+                    <SectionReveal className="bg-white/90 backdrop-blur-sm p-6 md:p-10 rounded-xl shadow-sm border border-slate-200/50 hover:shadow-md transition-shadow flex flex-col items-center text-center h-full">
                         <div className="w-14 h-14 bg-blue-50 text-blue-900 rounded-lg flex items-center justify-center mb-6 shrink-0 border border-blue-100">
                             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
@@ -53,7 +56,7 @@ const HomePage = () => {
                         </p>
                     </SectionReveal>
 
-                    <SectionReveal delay={0.1} className="bg-white p-6 md:p-10 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow flex flex-col items-center text-center h-full">
+                    <SectionReveal delay={0.1} className="bg-white/90 backdrop-blur-sm p-6 md:p-10 rounded-xl shadow-sm border border-slate-200/50 hover:shadow-md transition-shadow flex flex-col items-center text-center h-full">
                         <div className="w-14 h-14 bg-blue-50 text-blue-900 rounded-lg flex items-center justify-center mb-6 shrink-0 border border-blue-100">
                             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
@@ -63,7 +66,7 @@ const HomePage = () => {
                         </p>
                     </SectionReveal>
 
-                    <SectionReveal delay={0.2} className="bg-white p-6 md:p-10 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow flex flex-col items-center text-center h-full">
+                    <SectionReveal delay={0.2} className="bg-white/90 backdrop-blur-sm p-6 md:p-10 rounded-xl shadow-sm border border-slate-200/50 hover:shadow-md transition-shadow flex flex-col items-center text-center h-full">
                         <div className="w-14 h-14 bg-blue-50 text-blue-900 rounded-lg flex items-center justify-center mb-6 shrink-0 border border-blue-100">
                             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                         </div>
@@ -76,7 +79,7 @@ const HomePage = () => {
             </section>
 
             {/* 3. TRANSITIONAL SECTION */}
-            <SectionReveal className="bg-blue-900 text-white rounded-2xl p-8 md:p-12 lg:p-20 text-center shadow-lg mx-4 md:mx-0 border border-blue-800">
+            <SectionReveal className="bg-blue-900/90 backdrop-blur-sm text-white rounded-2xl p-8 md:p-12 lg:p-20 text-center shadow-lg mx-4 md:mx-0 border border-blue-800/50">
                 <h2 className="text-3xl md:text-4xl font-extrabold mb-6 tracking-tight">Why Organizations Engage Us</h2>
                 <p className="text-lg md:text-xl text-blue-100 leading-relaxed font-light max-w-4xl mx-auto">
                     Organizations partner with PHTech Consultants when internal systems become misaligned with strategic intent. Whether addressing fragmented supply chains, capability gaps, or performance drift, we intervene with structured analysis and execution discipline.
@@ -97,14 +100,14 @@ const HomePage = () => {
 
                 {/* 5. MISSION & PHILOSOPHY (Sharper) */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-20 px-4 md:px-0">
-                    <SectionReveal delay={0.1} className="bg-slate-50 p-8 md:p-10 border border-slate-200 rounded-2xl flex flex-col h-full">
+                    <SectionReveal delay={0.1} className="bg-slate-50/90 backdrop-blur-sm p-8 md:p-10 border border-slate-200/50 rounded-2xl flex flex-col h-full">
                         <h3 className="text-2xl font-bold text-slate-900 mb-4 pb-4 border-b border-slate-200">Our Mission</h3>
                         <p className="text-slate-700 leading-relaxed font-medium">
                             To engineer measurable customer satisfaction through disciplined processes, structured capability development, and uncompromised service quality.
                         </p>
                     </SectionReveal>
 
-                    <SectionReveal delay={0.2} className="bg-slate-50 p-8 md:p-10 border border-slate-200 rounded-2xl flex flex-col h-full">
+                    <SectionReveal delay={0.2} className="bg-slate-50/90 backdrop-blur-sm p-8 md:p-10 border border-slate-200/50 rounded-2xl flex flex-col h-full">
                         <h3 className="text-2xl font-bold text-slate-900 mb-4 pb-4 border-b border-slate-200">Our Philosophy</h3>
                         <p className="text-slate-700 leading-relaxed font-medium">
                             Technology and process frameworks must enable execution — not burden it. We design systems that simplify complexity and accelerate performance.
@@ -116,7 +119,7 @@ const HomePage = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 px-4 md:px-0">
 
                     {/* Principles */}
-                    <SectionReveal delay={0.3} className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-8 md:p-14 shadow-sm">
+                    <SectionReveal delay={0.3} className="lg:col-span-2 bg-white/90 backdrop-blur-sm border border-slate-200/50 rounded-2xl p-8 md:p-14 shadow-sm">
                         <h3 className="text-3xl font-extrabold text-slate-900 mb-10 tracking-tight">Our Operating Principles</h3>
 
                         <div className="space-y-8">
@@ -153,7 +156,7 @@ const HomePage = () => {
                     </SectionReveal>
 
                     {/* Associations (Added precise context line) */}
-                    <SectionReveal delay={0.4} className="bg-slate-900 text-white rounded-2xl p-8 md:p-10 flex flex-col justify-center shadow-lg relative overflow-hidden">
+                    <SectionReveal delay={0.4} className="bg-slate-900/90 backdrop-blur-sm text-white rounded-2xl p-8 md:p-10 flex flex-col justify-center shadow-lg relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-8 opacity-10">
                             <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z" /></svg>
                         </div>
@@ -192,7 +195,7 @@ const HomePage = () => {
 
                 </div>
             </section>
-
+            </div>
         </div>
     );
 };

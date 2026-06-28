@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import SectionReveal from './SectionReveal';
+import vivekMathurImg from '../assets/vivek_mathur_image.jpg';
 
 const trainers = [
     {
@@ -11,6 +13,30 @@ const trainers = [
         focus: "Telecom, PSU, Education sectors",
         bio: "Mr. Vivek is a seasoned competence development strategist and a People development professional of international repute. He has conducted training programs for top Telecom MNC’s & many reputed Indian organizations. Vivek with consistently ranked among top performers, his presentations and workshops are well known for high quality content backed by his unique and engaging style of delivery. His energizing sessions are insightful and stimulate participants to unleash their innate energies, explore their potential and create an intense desire for performance excellence.",
         links: { linkedin: "in.linkedin.com/in/vivekksindia/", youtube: "http://youtu.be/7VmmiF2pAlo" }
+    },
+    {
+        name: "Vivek Mathur",
+        role: "HR & Operations Consultant",
+        experience: "30+ Years Experience",
+        certifications: [
+            "HR Transformation",
+            "Compliance Management",
+            "Industrial Relations",
+            "Organizational Development"
+        ],
+        highlights: [
+            "HR Audit & Statutory Compliance Reviews",
+            "HR Policies, SOPs & Process Design",
+            "Industrial Relations & Labour Law Advisory",
+            "End-to-End Recruitment & Workforce Planning",
+            "Performance Management Systems",
+            "Training Need Identification (TNI)",
+            "Safety Culture Development Programs",
+            "HR Digitalization & HRIS Implementation"
+        ],
+        focus: "HR & Operations Consulting",
+        bio: "Seasoned HR and Operations Consultant with more than three decades of leadership experience across Foundry, Manufacturing, and Heavy Engineering sectors. Specialized in HR transformation, compliance management, industrial relations, recruitment, capability building, and organizational development.",
+        image: vivekMathurImg
     },
     {
         name: "Dr. P.C. Srivastava",
@@ -77,31 +103,59 @@ const trainers = [
     }
 ];
 
-const TrainerCard = ({ trainer, onClick }) => (
-    <div
-        onClick={() => onClick(trainer)}
-        className="bg-white border border-slate-200 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col h-full relative overflow-hidden group"
-    >
-        <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
-        <div className="relative z-10 flex flex-col flex-grow">
-            {trainer.name === "Vivek Srivastava" && (
-                <span className="bg-blue-900 text-white text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded inline-block self-start mb-3">Lead Partner</span>
-            )}
-            <h3 className="text-2xl font-bold text-slate-900 mb-1">{trainer.name}</h3>
-            <p className="text-blue-900 font-semibold mb-4 text-sm uppercase tracking-wide">{trainer.focus}</p>
+const TrainerCard = ({ trainer, onClick }) => {
+    const initials = trainer.name
+        .split(' ')
+        .map(n => n[0])
+        .join('')
+        .replace(/\./g, '')
+        .slice(0, 2)
+        .toUpperCase();
 
-            <div className="space-y-2 mb-6 text-slate-600 text-sm flex-grow">
-                <p className="flex items-center"><span className="text-slate-400 mr-2">✦</span> {trainer.experience}</p>
-                <p className="flex items-start"><span className="text-slate-400 mr-2 mt-0.5">✦</span> <span>{trainer.highlights[0]}</span></p>
-            </div>
+    return (
+        <div
+            onClick={() => onClick(trainer)}
+            className="bg-white border border-slate-200 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col h-full relative overflow-hidden group"
+        >
+            <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+            <div className="relative z-10 flex flex-col flex-grow">
+                {trainer.name === "Vivek Srivastava" && (
+                    <span className="bg-blue-900 text-white text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded inline-block self-start mb-3">Lead Partner</span>
+                )}
+                
+                {/* Profile Image / Initials Block */}
+                <div className="mb-5 flex items-center gap-4">
+                    {trainer.image ? (
+                        <img 
+                            src={trainer.image} 
+                            alt={trainer.name} 
+                            className="w-14 h-14 rounded-full object-cover border-2 border-blue-900 shadow-sm flex-shrink-0"
+                        />
+                    ) : (
+                        <div className="w-14 h-14 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center font-bold text-blue-900 text-lg shadow-sm flex-shrink-0">
+                            {initials}
+                        </div>
+                    )}
+                    <div>
+                        <h3 className="text-xl font-bold text-slate-900 leading-tight group-hover:text-blue-900 transition-colors">{trainer.name}</h3>
+                        <p className="text-blue-950/70 font-semibold text-[11px] uppercase tracking-wider mt-1">{trainer.focus}</p>
+                    </div>
+                </div>
 
-            <div className="text-blue-900 text-sm font-bold flex items-center group-hover:text-blue-700">
-                Read Full Profile
-                <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                <div className="space-y-2 mb-6 text-slate-600 text-sm flex-grow">
+                    <p className="flex items-center"><span className="text-slate-400 mr-2">✦</span> {trainer.experience}</p>
+                    <p className="flex items-start"><span className="text-slate-400 mr-2 mt-0.5">✦</span> <span className="line-clamp-2">{trainer.highlights[0]}</span></p>
+                </div>
+
+                <div className="text-blue-900 text-sm font-bold flex items-center group-hover:text-blue-700 mt-auto">
+                    Read Full Profile
+                    <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
+
 
 const TrainersPage = () => {
     const [selectedTrainer, setSelectedTrainer] = useState(null);
@@ -128,13 +182,26 @@ const TrainersPage = () => {
                 <div className="bg-blue-900 text-white rounded-2xl p-6 md:p-12 shadow-xl border border-blue-800 flex flex-col md:flex-row gap-8 md:gap-10">
                     <div className="md:w-1/3 flex flex-col">
                         <div className="bg-white/10 w-full aspect-square rounded-xl flex items-center justify-center mb-6 overflow-hidden border border-blue-700/50">
-                            {/* 
-                 A placeholder for the actual photo. Using initials for an executive look. 
-                 Replace with an img tag pointing to the actual photo if available.
-               */}
-                            <span className="text-6xl font-light text-blue-200">VS</span>
+                            {leadTrainer.image ? (
+                                <img 
+                                    src={leadTrainer.image} 
+                                    alt={leadTrainer.name} 
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                <span className="text-6xl font-light text-blue-200">
+                                    {leadTrainer.name
+                                        .split(' ')
+                                        .map(n => n[0])
+                                        .join('')
+                                        .replace(/\./g, '')
+                                        .slice(0, 2)
+                                        .toUpperCase()}
+                                </span>
+                            )}
                         </div>
                         <h2 className="text-3xl font-bold mb-1">{leadTrainer.name}</h2>
+
                         <p className="text-blue-300 font-bold uppercase tracking-wider text-sm mb-6">{leadTrainer.role}</p>
 
                         <div className="space-y-4">
@@ -187,8 +254,8 @@ const TrainersPage = () => {
                 ))}
             </div>
 
-            {/* Modal Profile View */}
-            {selectedTrainer && (
+            {/* Modal Profile View using Portal to break out of z-index bounds */}
+            {selectedTrainer && createPortal(
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onClick={() => setSelectedTrainer(null)}>
                     <div
                         className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-6 md:p-12 relative overflow-hidden max-h-[90vh] overflow-y-auto"
@@ -202,12 +269,38 @@ const TrainersPage = () => {
                             ✕
                         </button>
 
-                        <h2 className="text-3xl font-extrabold text-blue-900 mb-1 pr-10">{selectedTrainer.name}</h2>
-                        <p className="text-blue-600 font-bold uppercase tracking-widest text-sm mb-6">{selectedTrainer.focus}</p>
+                        {/* Profile Image & Header Block in Modal */}
+                        <div className="flex flex-col sm:flex-row gap-6 mb-8 items-center sm:items-start border-b border-slate-100 pb-6 pr-10">
+                            {selectedTrainer.image ? (
+                                <img 
+                                    src={selectedTrainer.image} 
+                                    alt={selectedTrainer.name} 
+                                    className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover border-2 border-blue-900 shadow-md flex-shrink-0"
+                                />
+                            ) : (
+                                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center font-bold text-blue-900 text-3xl shadow-md flex-shrink-0">
+                                    {selectedTrainer.name
+                                        .split(' ')
+                                        .map(n => n[0])
+                                        .join('')
+                                        .replace(/\./g, '')
+                                        .slice(0, 2)
+                                        .toUpperCase()}
+                                </div>
+                            )}
+                            <div className="text-center sm:text-left">
+                                <h2 className="text-3xl font-extrabold text-blue-900 mb-1">{selectedTrainer.name}</h2>
+                                <p className="text-blue-600 font-bold uppercase tracking-widest text-xs sm:text-sm mb-2">{selectedTrainer.focus}</p>
+                                <span className="inline-block bg-slate-100 text-slate-700 text-xs font-semibold px-2.5 py-1 rounded">
+                                    {selectedTrainer.experience}
+                                </span>
+                            </div>
+                        </div>
 
                         <div className="text-slate-700 leading-relaxed font-medium mb-8 p-6 bg-slate-50 border border-slate-100 rounded-lg">
                             {selectedTrainer.bio}
                         </div>
+
 
                         <div className="grid grid-cols-2 gap-8">
                             <div>
@@ -229,7 +322,8 @@ const TrainersPage = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
 
         </div>

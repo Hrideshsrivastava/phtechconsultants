@@ -15,7 +15,8 @@ const ExpandingNavbar = () => {
     { id: 'products', label: 'Products' },
     { id: 'trainers', label: 'Trainers' },
     { id: 'events', label: 'Events' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'contact', label: 'Contact' },
+    { id: 'gallery', label: 'Gallery' }
   ];
 
   // Scroll spy effect
@@ -51,12 +52,20 @@ const ExpandingNavbar = () => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
 
-    if (location.pathname.startsWith('/services/')) {
-        // We are on a deep link, navigate to home and then scroll
+    // If it is the gallery, navigate there directly
+    if (item.id === 'gallery') {
+        navigate('/gallery');
+        return;
+    }
+
+    // If we are currently on a separate page (services deep link or gallery)
+    if (location.pathname.startsWith('/services/') || location.pathname === '/gallery') {
+        // Navigate to the correct hash route which OnePage will handle on mount
         navigate(item.id === 'home' ? '/' : `/${item.id}`);
         return;
     }
 
+    // Standard in-page smooth scrolling for OnePage
     const el = document.getElementById(item.id);
     if (el) {
       window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
@@ -84,7 +93,9 @@ const ExpandingNavbar = () => {
             {navItems.map((item) => {
               // Highlight if we are in deep links and it's services
               const isDeepLink = location.pathname.startsWith('/services/') && item.id === 'services';
-              const isActive = activeSection === item.id || isDeepLink;
+              const isGalleryLink = location.pathname === '/gallery' && item.id === 'gallery';
+              const isOnePage = location.pathname === '/';
+              const isActive = (isOnePage && activeSection === item.id) || isDeepLink || isGalleryLink;
               
               return (
                 <a
@@ -129,8 +140,11 @@ const ExpandingNavbar = () => {
         <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md absolute w-full left-0 top-20">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => {
+              // Highlight if we are in deep links and it's services
               const isDeepLink = location.pathname.startsWith('/services/') && item.id === 'services';
-              const isActive = activeSection === item.id || isDeepLink;
+              const isGalleryLink = location.pathname === '/gallery' && item.id === 'gallery';
+              const isOnePage = location.pathname === '/';
+              const isActive = (isOnePage && activeSection === item.id) || isDeepLink || isGalleryLink;
               
               return (
                 <a

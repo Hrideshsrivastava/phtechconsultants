@@ -10,6 +10,7 @@ import SCM from './components/services/SCM';
 import IPA from './components/services/IPA';
 import PPM from './components/services/PPM';
 import MRBD from './components/services/MRBD';
+import GalleryPage from './components/GalleryPage';
 
 // --- Scroll to top on route change ---
 const ScrollToTop = () => {
@@ -48,6 +49,8 @@ function App() {
               <Route path="/services/ipa" element={<IPA />} />
               <Route path="/services/ppm" element={<PPM />} />
               <Route path="/services/mrbd" element={<MRBD />} />
+
+              <Route path="/gallery" element={<GalleryPage />} />
 
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

@@ -22,35 +22,48 @@ const ImageTrack = () => {
     const track = trackRef.current;
     if (!track) return;
 
+    let targetPercentage = 0;
+    let currentPercentage = 0;
+    let rafId;
+
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      
       const scrollFraction = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+      targetPercentage = scrollFraction * -100;
+    };
+
+    const animate = () => {
+      // Linear interpolation (lerp) for buttery smooth trailing effect
+      currentPercentage += (targetPercentage - currentPercentage) * 0.06;
       
-      // We map the full page scroll to -100% so that at the very bottom of the page,
-      // the track translates fully and the last image is perfectly visible on screen.
-      const nextPercentage = scrollFraction * -100;
-      
-      track.animate({
-        transform: `translate(${nextPercentage}%, -50%)`
-      }, { duration: 1200, fill: "forwards" });
-      
-      for(const image of track.getElementsByClassName("gallery-image")) {
-        image.animate({
-          // The magic illusion requires this percentage to map 1:1 with the track movement!
-          objectPosition: `${100 + nextPercentage}% center`
-        }, { duration: 1200, fill: "forwards" });
+      // Stop updating DOM if it's very close to target to save CPU
+      if (Math.abs(targetPercentage - currentPercentage) > 0.01) {
+          track.style.transform = `translate(${currentPercentage}%, -50%)`;
+          
+          for(const image of track.getElementsByClassName("gallery-image")) {
+            image.style.objectPosition = `${100 + currentPercentage}% center`;
+          }
       }
+
+      rafId = requestAnimationFrame(animate);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     
-    // Trigger once on mount to set initial position
+    // Trigger once on mount to set initial position immediately without lerp delay
     handleScroll();
+    currentPercentage = targetPercentage;
+    track.style.transform = `translate(${currentPercentage}%, -50%)`;
+    for(const image of track.getElementsByClassName("gallery-image")) {
+      image.style.objectPosition = `${100 + currentPercentage}% center`;
+    }
+    
+    animate();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(rafId);
     };
   }, []);
 

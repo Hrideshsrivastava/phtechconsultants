@@ -1,8 +1,12 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import ExpandingNavbar from './ExpandingNavbar';
 import Footer from './Footer';
 
 const Layout = ({ children, onNavClick, activePage }) => {
+    const location = useLocation();
+    const isGallery = location.pathname === '/gallery';
+
     return (
         <div className="min-h-screen flex flex-col font-sans text-slate-800">
             {/* 
@@ -18,12 +22,12 @@ const Layout = ({ children, onNavClick, activePage }) => {
         pt-20 or pt-24 offsets the fixed navbar.
         flex-grow ensures the footer is pushed to the bottom.
       */}
-            <main className="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
+            <main className={`flex-grow ${isGallery ? '' : 'pt-24 pb-16 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto'}`}>
                 {children}
             </main>
 
             {/* Footer stays at the bottom */}
-            <Footer onNavClick={onNavClick} />
+            {!isGallery && <Footer onNavClick={onNavClick} />}
         </div>
     );
 };

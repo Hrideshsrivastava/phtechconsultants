@@ -46,9 +46,9 @@ const Footer = () => {
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-blue-800 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500">
                 <p>&copy; {new Date().getFullYear()} PHTech Consultants. All rights reserved.</p>
-                <div className="space-x-4 mt-4 md:mt-0">
-                    <a href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
-                    <a href="#" className="hover:text-slate-300 transition-colors">Terms of Service</a>
+                <div className="space-x-4 mt-4 md:mt-0 flex items-center">
+                    <Link to="/privacy" onClick={() => handleLinkClick('/privacy')} className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
+                    <Link to="/terms" onClick={() => handleLinkClick('/terms')} className="hover:text-slate-300 transition-colors">Terms of Service</Link>
                 </div>
             </div>
         </footer>

@@ -64,8 +64,8 @@ const ExpandingNavbar = () => {
         return;
     }
 
-    // If we are currently on a separate page (services deep link, gallery, or lms)
-    if (location.pathname.startsWith('/services/') || location.pathname === '/gallery' || location.pathname.startsWith('/lms')) {
+    // If we are currently on a separate page (not the main OnePage layout)
+    if (location.pathname !== '/') {
         // Navigate to the correct hash route which OnePage will handle on mount
         navigate(item.id === 'home' ? '/' : `/${item.id}`);
         return;

@@ -17,13 +17,15 @@ import EmployabilityQuiz from './components/lms/EmployabilityQuiz';
 import LMSLogin from './components/lms/LMSLogin';
 import ProtectedRoute from './components/lms/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
+import PrivacyPolicy from './components/legal/PrivacyPolicy';
+import TermsOfService from './components/legal/TermsOfService';
 
 // --- Scroll to top on route change ---
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
-    // We handle custom scrolling in OnePage, so we only scroll to top for deep links and lms
-    if (pathname.startsWith('/services/') || pathname.startsWith('/lms')) {
+    // We handle custom scrolling in OnePage, so we only scroll to top for deep links and new pages
+    if (pathname.startsWith('/services/') || pathname.startsWith('/lms') || pathname.startsWith('/privacy') || pathname.startsWith('/terms')) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [pathname]);
@@ -70,6 +72,9 @@ function App() {
               <Route path="/lms" element={<ProtectedRoute><LMSDashboard /></ProtectedRoute>} />
               <Route path="/lms/tests" element={<ProtectedRoute><TestsDashboard /></ProtectedRoute>} />
               <Route path="/lms/tests/employability" element={<ProtectedRoute><EmployabilityQuiz /></ProtectedRoute>} />
+
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
 
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

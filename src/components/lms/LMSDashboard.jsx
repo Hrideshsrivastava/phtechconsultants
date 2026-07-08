@@ -9,16 +9,13 @@ const LMSDashboard = () => {
     return (
         <div className="w-full flex flex-col items-center py-12 relative min-h-screen">
             <div className="absolute inset-0 bg-slate-50 -z-10"></div>
-            
+
             <SectionReveal className="text-center mb-12 max-w-3xl px-4">
-                <span className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4 block">Learning Management System</span>
                 <h1 className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-6 tracking-tight">
                     Welcome, {currentUser?.displayName || 'User'}!
                 </h1>
-                <p className="text-lg text-slate-600 leading-relaxed font-medium mb-4">
-                    Welcome to the Learning Management System. Select a module below to begin.
-                </p>
-                <button 
+
+                <button
                     onClick={logout}
                     className="text-sm font-bold text-slate-500 hover:text-blue-900 underline"
                 >

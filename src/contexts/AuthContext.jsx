@@ -20,13 +20,13 @@ export const AuthProvider = ({ children }) => {
         const provider = new GoogleAuthProvider();
         const userCredential = await signInWithPopup(auth, provider);
         
-        // Save to firestore
-        await setDoc(doc(db, 'users', userCredential.user.uid), {
+        // Save to firestore in the background (don't await) so it doesn't block login if Firestore hangs
+        setDoc(doc(db, 'users', userCredential.user.uid), {
             name: userCredential.user.displayName,
             email: userCredential.user.email,
             photoURL: userCredential.user.photoURL,
             lastLogin: new Date()
-        }, { merge: true });
+        }, { merge: true }).catch(e => console.warn("Firestore background save failed:", e));
 
         return userCredential.user;
     }

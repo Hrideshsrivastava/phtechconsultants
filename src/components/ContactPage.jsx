@@ -23,18 +23,22 @@ const ContactPage = () => (
                         </a>
                     </div>
                 </div>
-
-                {/* Location Section */}
+                {/* LinkedIn Section */}
                 <div className="flex items-start">
-                    <svg className="w-6 h-6 text-blue-900 mr-4 mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <svg className="w-6 h-6 text-blue-900 mr-4 mt-1 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554s.05-8.812 0-9.728h3.554v1.375c.426-.659 1.189-1.592 2.894-1.592 2.113 0 3.695 1.381 3.695 4.349v5.596zM5.337 9.433c-1.144 0-1.915-.761-1.915-1.713 0-.951.768-1.71 1.959-1.71 1.188 0 1.914.759 1.939 1.71 0 .952-.751 1.713-1.983 1.713zm1.946 11.019H3.391V8.724h3.892v11.728zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path>
                     </svg>
-                    <div>
-                        <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-1">Based In</h3>
-                        <p className="text-slate-900 font-bold text-lg">Noida</p>
+                    <div className="min-w-0 flex-1">
+                        <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-1">Connect On LinkedIn</h3>
+                        <a href="https://www.linkedin.com/company/phtechconsultant/" target="_blank" rel="noopener noreferrer" className="block text-slate-900 font-bold text-base md:text-lg hover:text-blue-700 transition-colors">
+                            <span className="md:hidden">LinkedIn</span>
+                            <span className="hidden md:inline">PH Tech Consultants</span>
+                        </a>
                     </div>
                 </div>
+
+            
+        
 
                 {/* Phone Section */}
                 <div className="flex items-start md:col-span-2">
@@ -50,6 +54,14 @@ const ContactPage = () => (
                             <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-1">Landline</h3>
                             <a href="tel:+91-120-4565227" className="text-slate-900 font-bold text-lg hover:text-blue-700 transition-colors">+91-120-4565227</a>
                         </div>
+                    </div>
+                    <svg className="w-6 h-6 text-blue-900 ml-4 mr-4 mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <div>
+                        <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-1">Based In</h3>
+                        <p className="text-slate-900 font-bold text-lg">Noida</p>
                     </div>
                 </div>
             </div>

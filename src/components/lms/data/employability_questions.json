@@ -1,0 +1,47 @@
+[
+    {
+        "question": "How do you typically approach a complex problem?",
+        "options": [
+            { "text": "Break it down into smaller, manageable parts", "score": 4 },
+            { "text": "Ask clarifying questions and collaborate on a solution", "score": 4 },
+            { "text": "Look for immediate solutions online", "score": 2 },
+            { "text": "Wait for someone else to take the lead", "score": 1 }
+        ]
+    },
+    {
+        "question": "When working in a team, what role do you usually take?",
+        "options": [
+            { "text": "Leader - guiding the group to the goal", "score": 4 },
+            { "text": "Collaborator - ensuring everyone's voice is heard", "score": 4 },
+            { "text": "Executer - focusing on completing assigned tasks", "score": 3 },
+            { "text": "Observer - stepping back unless needed", "score": 2 }
+        ]
+    },
+    {
+        "question": "How do you handle constructive criticism?",
+        "options": [
+            { "text": "Listen, reflect, and apply the feedback to improve", "score": 4 },
+            { "text": "Ask for specific examples to understand better", "score": 4 },
+            { "text": "Feel defensive but try to adjust my work", "score": 2 },
+            { "text": "Ignore it if I disagree with the assessment", "score": 1 }
+        ]
+    },
+    {
+        "question": "What is your primary motivation in a professional setting?",
+        "options": [
+            { "text": "Continuous learning and professional growth", "score": 4 },
+            { "text": "Achieving targets and creating measurable impact", "score": 4 },
+            { "text": "Job security and a stable routine", "score": 2 },
+            { "text": "Building strong workplace relationships", "score": 3 }
+        ]
+    },
+    {
+        "question": "How do you manage tight deadlines or unexpected changes?",
+        "options": [
+            { "text": "Prioritize tasks and focus on structured execution", "score": 4 },
+            { "text": "Communicate potential delays early and adjust plans", "score": 4 },
+            { "text": "Work overtime quietly to get it done", "score": 2 },
+            { "text": "Feel overwhelmed and hope for an extension", "score": 1 }
+        ]
+    }
+]

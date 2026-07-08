@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const imagesList = [
+export const imagesList = [
     '/WhatsApp Image 2026-06-28 at 7.01.24 PM.jpeg',
     '/WhatsApp Image 2026-06-28 at 7.01.25 PM.jpeg',
     '/WhatsApp Image 2026-06-28 at 7.01.27 PM.jpeg',

@@ -197,9 +197,22 @@ const TrainingPage = () => {
                 {trainingCategories.map((category, idx) => (
                     <div key={idx} className="px-4">
                         <SectionReveal>
-                            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 border-b-2 border-slate-100 pb-4 inline-block">
-                                {category.category}
-                            </h2>
+                            <div className="flex flex-wrap items-center gap-4 mb-8 border-b-2 border-slate-100 pb-4">
+                                <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+                                    {category.category}
+                                </h2>
+                                {category.category === "Career & Employability" && (
+                                    <a 
+                                        href="/FDPPHTC.34214154.pdf" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center text-sm font-bold text-blue-700 bg-blue-50 border border-blue-100 hover:bg-blue-100 hover:text-blue-900 px-4 py-1.5 rounded-full transition-colors ml-auto shadow-sm"
+                                    >
+                                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Download PDF
+                                    </a>
+                                )}
+                            </div>
                         </SectionReveal>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">

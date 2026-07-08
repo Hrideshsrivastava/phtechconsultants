@@ -16,7 +16,8 @@ const ExpandingNavbar = () => {
     { id: 'trainers', label: 'Trainers' },
     { id: 'events', label: 'Events' },
     { id: 'contact', label: 'Contact' },
-    { id: 'gallery', label: 'Gallery' }
+    { id: 'gallery', label: 'Gallery' },
+    { id: 'lms', label: 'LMS' }
   ];
 
   // Scroll spy effect
@@ -57,9 +58,14 @@ const ExpandingNavbar = () => {
         navigate('/gallery');
         return;
     }
+    // If it is the LMS, navigate there directly
+    if (item.id === 'lms') {
+        navigate('/lms');
+        return;
+    }
 
-    // If we are currently on a separate page (services deep link or gallery)
-    if (location.pathname.startsWith('/services/') || location.pathname === '/gallery') {
+    // If we are currently on a separate page (services deep link, gallery, or lms)
+    if (location.pathname.startsWith('/services/') || location.pathname === '/gallery' || location.pathname.startsWith('/lms')) {
         // Navigate to the correct hash route which OnePage will handle on mount
         navigate(item.id === 'home' ? '/' : `/${item.id}`);
         return;
@@ -94,8 +100,9 @@ const ExpandingNavbar = () => {
               // Highlight if we are in deep links and it's services
               const isDeepLink = location.pathname.startsWith('/services/') && item.id === 'services';
               const isGalleryLink = location.pathname === '/gallery' && item.id === 'gallery';
+              const isLMSLink = location.pathname.startsWith('/lms') && item.id === 'lms';
               const isOnePage = location.pathname === '/';
-              const isActive = (isOnePage && activeSection === item.id) || isDeepLink || isGalleryLink;
+              const isActive = (isOnePage && activeSection === item.id) || isDeepLink || isGalleryLink || isLMSLink;
               
               return (
                 <a
@@ -143,8 +150,9 @@ const ExpandingNavbar = () => {
               // Highlight if we are in deep links and it's services
               const isDeepLink = location.pathname.startsWith('/services/') && item.id === 'services';
               const isGalleryLink = location.pathname === '/gallery' && item.id === 'gallery';
+              const isLMSLink = location.pathname.startsWith('/lms') && item.id === 'lms';
               const isOnePage = location.pathname === '/';
-              const isActive = (isOnePage && activeSection === item.id) || isDeepLink || isGalleryLink;
+              const isActive = (isOnePage && activeSection === item.id) || isDeepLink || isGalleryLink || isLMSLink;
               
               return (
                 <a

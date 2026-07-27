@@ -6,6 +6,7 @@ import Footer from './Footer';
 const Layout = ({ children, onNavClick, activePage }) => {
     const location = useLocation();
     const isGallery = location.pathname === '/gallery';
+    const isTestPage = location.pathname.startsWith('/lms/tests/') && location.pathname !== '/lms/tests';
 
     return (
         <div className="min-h-screen flex flex-col font-sans text-slate-800">
@@ -13,21 +14,23 @@ const Layout = ({ children, onNavClick, activePage }) => {
         Navbar wrapper ensures it stays fixed at the top with a high z-index.
         We pass the navigation props down to ExpandingNavbar.
       */}
-            <div className="fixed top-0 left-0 right-0 z-50">
-                <ExpandingNavbar onNavClick={onNavClick} activePage={activePage} />
-            </div>
+            {!isTestPage && (
+                <div className="fixed top-0 left-0 right-0 z-50">
+                    <ExpandingNavbar onNavClick={onNavClick} activePage={activePage} />
+                </div>
+            )}
 
             {/* 
         Main content wrapper. 
         pt-20 or pt-24 offsets the fixed navbar.
         flex-grow ensures the footer is pushed to the bottom.
       */}
-            <main className={`flex-grow ${isGallery ? '' : 'pt-24 pb-16 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto'}`}>
+            <main className={`flex-grow ${isGallery || isTestPage ? '' : 'pt-24 pb-16 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto'}`}>
                 {children}
             </main>
 
             {/* Footer stays at the bottom */}
-            {!isGallery && <Footer onNavClick={onNavClick} />}
+            {!isGallery && !isTestPage && <Footer onNavClick={onNavClick} />}
         </div>
     );
 };

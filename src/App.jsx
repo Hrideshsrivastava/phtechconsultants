@@ -13,7 +13,7 @@ import MRBD from './components/services/MRBD';
 import GalleryPage, { imagesList } from './components/GalleryPage';
 import LMSDashboard from './components/lms/LMSDashboard';
 import TestsDashboard from './components/lms/TestsDashboard';
-import EmployabilityQuiz from './components/lms/EmployabilityQuiz';
+import GenericQuiz from './components/lms/GenericQuiz';
 import LMSLogin from './components/lms/LMSLogin';
 import ProtectedRoute from './components/lms/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
@@ -71,7 +71,7 @@ function App() {
               <Route path="/lms/login" element={<LMSLogin />} />
               <Route path="/lms" element={<ProtectedRoute><LMSDashboard /></ProtectedRoute>} />
               <Route path="/lms/tests" element={<ProtectedRoute><TestsDashboard /></ProtectedRoute>} />
-              <Route path="/lms/tests/employability" element={<ProtectedRoute><EmployabilityQuiz /></ProtectedRoute>} />
+              <Route path="/lms/tests/:testId" element={<ProtectedRoute><GenericQuiz /></ProtectedRoute>} />
 
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />

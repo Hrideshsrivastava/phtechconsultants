@@ -7,8 +7,15 @@ const LMSLogin = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     
-    const { loginWithGoogle } = useAuth();
+    const { currentUser, loginWithGoogle } = useAuth();
     const navigate = useNavigate();
+
+    // Auto-redirect if already logged in (fixes the frozen sign-in button issue)
+    React.useEffect(() => {
+        if (currentUser) {
+            navigate('/lms');
+        }
+    }, [currentUser, navigate]);
 
     const handleGoogleLogin = async () => {
         setError('');

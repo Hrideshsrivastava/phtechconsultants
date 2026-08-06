@@ -213,6 +213,11 @@ const GenericQuiz = () => {
         setScore(calculatedScore);
         setSectionAnalysis(analysis);
         setCompleted(true);
+        
+        if (document.fullscreenElement) {
+            document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
+        }
+        
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -292,7 +297,7 @@ const GenericQuiz = () => {
                                 </p>
                                 <div className="flex justify-center gap-4">
                                     <button 
-                                        onClick={() => navigate('/lms/tests')}
+                                        onClick={() => navigate(test.category ? `/lms/tests?category=${encodeURIComponent(test.category)}` : '/lms/tests')}
                                         className="bg-slate-100 text-slate-600 font-bold py-3 px-6 rounded-xl hover:bg-slate-200 transition-all duration-300"
                                     >
                                         Go Back
@@ -554,7 +559,7 @@ const GenericQuiz = () => {
                     <SectionReveal>
                         <div className="flex justify-center mt-8">
                             <button 
-                                onClick={() => navigate('/lms/tests')}
+                                onClick={() => navigate(test.category ? `/lms/tests?category=${encodeURIComponent(test.category)}` : '/lms/tests')}
                                 className="bg-slate-800 text-white font-bold py-4 px-12 rounded-xl shadow-md hover:bg-slate-700 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                             >
                                 Return to Dashboard

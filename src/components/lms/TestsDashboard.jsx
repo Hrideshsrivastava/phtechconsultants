@@ -36,6 +36,33 @@ const categoriesList = [
         icon: (
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
         )
+    },
+    {
+        name: "Technical & Engineering Assessments",
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+        )
+    }
+];
+
+const branchesList = [
+    {
+        name: "Computer Science & Engineering (CSE)",
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+        )
+    },
+    {
+        name: "Electronics & Communication (ECE)",
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+        )
+    },
+    {
+        name: "Mechanical Engineering (ME)",
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        )
     }
 ];
 
@@ -95,11 +122,45 @@ const TestsDashboard = () => {
                         </div>
                     </SectionReveal>
                 </div>
+            ) : activeCategory === "Technical & Engineering Assessments" ? (
+                <div className="w-full max-w-6xl px-4 mx-auto mt-4">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-10 w-full mt-4">
+                        <div className="flex items-center gap-4 w-full md:w-auto">
+                            <button onClick={() => setSearchParams({})} className="text-slate-400 hover:text-blue-900 transition-colors p-2 -ml-2 rounded-xl hover:bg-slate-100 border border-transparent hover:border-slate-200">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                            </button>
+                            <h2 className="text-2xl font-extrabold text-slate-800 tracking-tight">{activeCategory}</h2>
+                        </div>
+                    </div>
+                    <SectionReveal>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
+                            {branchesList.map(branch => (
+                                <button key={branch.name} onClick={() => setSearchParams({ category: branch.name })} className="group block text-left h-full">
+                                    <div className="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-blue-200 transition-all duration-300 h-full flex flex-col items-start relative overflow-hidden">
+                                        <div className="w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-900 group-hover:text-white transition-colors duration-300">
+                                            {branch.icon}
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-blue-900 transition-colors leading-tight">{branch.name}</h3>
+                                        <p className="text-slate-500 text-sm">Select branch to view tests.</p>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
+                    </SectionReveal>
+                </div>
             ) : (
                 <div className="w-full max-w-6xl px-4 mx-auto flex flex-col">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-10 w-full mt-4">
                         <div className="flex items-center gap-4 w-full md:w-auto">
-                            <button onClick={() => { setSearchParams({}); setSearchQuery(""); }} className="text-slate-400 hover:text-blue-900 transition-colors p-2 -ml-2 rounded-xl hover:bg-slate-100 border border-transparent hover:border-slate-200">
+                            <button onClick={() => { 
+                                const isBranch = branchesList.some(b => b.name === activeCategory);
+                                if (isBranch) {
+                                    setSearchParams({ category: "Technical & Engineering Assessments" });
+                                } else {
+                                    setSearchParams({}); 
+                                }
+                                setSearchQuery(""); 
+                            }} className="text-slate-400 hover:text-blue-900 transition-colors p-2 -ml-2 rounded-xl hover:bg-slate-100 border border-transparent hover:border-slate-200">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                             </button>
                             <h2 className="text-2xl font-extrabold text-slate-800 tracking-tight">{activeCategory}</h2>

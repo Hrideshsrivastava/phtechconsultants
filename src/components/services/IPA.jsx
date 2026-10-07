@@ -1,7 +1,7 @@
 import React from 'react';
 import ServiceLayout from '../ServiceLayout';
 
-const IPA = () => {
+const IPA = ({ onBack }) => {
     return (
         <ServiceLayout
             title="Information Process Automation"
@@ -24,6 +24,7 @@ const IPA = () => {
                 "Operational Efficiency Gains",
                 "Structured Information Governance"
             ]}
+            onBack={onBack}
         />
     );
 };

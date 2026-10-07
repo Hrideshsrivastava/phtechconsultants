@@ -1,5 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+const navItems = [
+  { id: 'home', label: 'Home' },
+  { id: 'services', label: 'Services' },
+  { id: 'training', label: 'Training' },
+  { id: 'simulation', label: 'Simulation' },
+  { id: 'products', label: 'Products' },
+  { id: 'trainers', label: 'Trainers' },
+  { id: 'events', label: 'Events' },
+  { id: 'contact', label: 'Contact' },
+  { id: 'gallery', label: 'Gallery' },
+  { id: 'lms', label: 'LMS' }
+];
+
+const scrollingPagePaths = [
+  '/',
+  '/services',
+  '/training',
+  '/simulation',
+  '/products',
+  '/trainers',
+  '/events',
+  '/contact'
+];
 
 const ExpandingNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -7,23 +31,26 @@ const ExpandingNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'services', label: 'Services' },
-    { id: 'training', label: 'Training' },
-    { id: 'simulation', label: 'Simulation' },
-    { id: 'products', label: 'Products' },
-    { id: 'trainers', label: 'Trainers' },
-    { id: 'events', label: 'Events' },
-    { id: 'contact', label: 'Contact' },
-    { id: 'gallery', label: 'Gallery' },
-    { id: 'lms', label: 'LMS' }
-  ];
+  const isScrollingPage = scrollingPagePaths.includes(location.pathname);
+  const currentSection = location.pathname.startsWith('/services/')
+    ? 'services'
+    : location.pathname.startsWith('/training/')
+      ? 'training'
+    : location.pathname === '/gallery'
+      ? 'gallery'
+      : location.pathname.startsWith('/lms')
+        ? 'lms'
+        : isScrollingPage
+          ? activeSection
+          : null;
+  const currentSectionLabel = navItems.find((item) => item.id === currentSection)?.label;
+
+  const isItemActive = (item) => item.id === currentSection;
 
   // Scroll spy effect
   useEffect(() => {
     // If not on the main page, don't spy
-    if (location.pathname.startsWith('/services/')) return;
+    if (location.pathname.startsWith('/services/') || location.pathname.startsWith('/training/')) return;
 
     const handleScroll = () => {
       let current = 'home';
@@ -89,20 +116,15 @@ const ExpandingNavbar = () => {
               className="flex-shrink-0 flex items-center cursor-pointer"
               onClick={(e) => handleNavClick(e, {id: 'home'})}
             >
-              <span className="text-2xl font-extrabold text-blue-900 tracking-tight">PHTech</span>
-              <span className="text-2xl font-medium text-slate-500 ml-1">Consultants</span>
+              <span className="text-xl sm:text-2xl font-extrabold text-blue-900 tracking-tight">PHTech</span>
+              <span className="text-xl sm:text-2xl font-medium text-slate-500 ml-1">Consultants</span>
             </a>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => {
-              // Highlight if we are in deep links and it's services
-              const isDeepLink = location.pathname.startsWith('/services/') && item.id === 'services';
-              const isGalleryLink = location.pathname === '/gallery' && item.id === 'gallery';
-              const isLMSLink = location.pathname.startsWith('/lms') && item.id === 'lms';
-              const isOnePage = location.pathname === '/';
-              const isActive = (isOnePage && activeSection === item.id) || isDeepLink || isGalleryLink || isLMSLink;
+              const isActive = isItemActive(item);
               
               return (
                 <a
@@ -121,7 +143,16 @@ const ExpandingNavbar = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex items-center md:hidden">
+          <div className="flex items-center gap-1 md:hidden">
+            {currentSectionLabel && (
+              <span
+                className="max-w-[5.5rem] truncate text-xs font-bold uppercase tracking-wider text-blue-900 sm:max-w-none sm:text-sm"
+                aria-live="polite"
+              >
+                <span className="sr-only">Current section: </span>
+                {currentSectionLabel}
+              </span>
+            )}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-blue-900 hover:bg-slate-100 focus:outline-none"
@@ -147,12 +178,7 @@ const ExpandingNavbar = () => {
         <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md absolute w-full left-0 top-20">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => {
-              // Highlight if we are in deep links and it's services
-              const isDeepLink = location.pathname.startsWith('/services/') && item.id === 'services';
-              const isGalleryLink = location.pathname === '/gallery' && item.id === 'gallery';
-              const isLMSLink = location.pathname.startsWith('/lms') && item.id === 'lms';
-              const isOnePage = location.pathname === '/';
-              const isActive = (isOnePage && activeSection === item.id) || isDeepLink || isGalleryLink || isLMSLink;
+              const isActive = isItemActive(item);
               
               return (
                 <a

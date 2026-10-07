@@ -1,7 +1,7 @@
 import React from 'react';
 import ServiceLayout from '../ServiceLayout';
 
-const MRBD = () => {
+const MRBD = ({ onBack }) => {
     return (
         <ServiceLayout
             title="Market Research & Business Development"
@@ -26,6 +26,7 @@ const MRBD = () => {
                 "Sustainable Revenue Growth",
                 "Competitive Advantage Clarity"
             ]}
+            onBack={onBack}
         />
     );
 };

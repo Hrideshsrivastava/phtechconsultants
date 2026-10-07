@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SectionReveal from './SectionReveal';
-import ImageTrack from './ImageTrack';
 
 const HomePage = () => {
     return (
         <div className="relative w-full">
-            <ImageTrack />
-
             <div className="flex flex-col space-y-24 pb-12 relative z-10 pt-4">
             {/* 1. HERO - Strong & Sharpened */}
             <section className="relative bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-slate-200/50 overflow-hidden">

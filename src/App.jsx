@@ -2,14 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 import Layout from './components/Layout';
-import OnePage from './components/OnePage';
-
-// Service Deep Links
-import HR_OD from './components/services/HR_OD';
-import SCM from './components/services/SCM';
-import IPA from './components/services/IPA';
-import PPM from './components/services/PPM';
-import MRBD from './components/services/MRBD';
+import ServiceExperience from './components/ServiceExperience';
 import GalleryPage, { imagesList } from './components/GalleryPage';
 import LMSDashboard from './components/lms/LMSDashboard';
 import TestsDashboard from './components/lms/TestsDashboard';
@@ -25,7 +18,7 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
     // We handle custom scrolling in OnePage, so we only scroll to top for deep links and new pages
-    if (pathname.startsWith('/services/') || pathname.startsWith('/lms') || pathname.startsWith('/privacy') || pathname.startsWith('/terms')) {
+    if (pathname.startsWith('/lms') || pathname.startsWith('/privacy') || pathname.startsWith('/terms')) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [pathname]);
@@ -50,22 +43,23 @@ function App() {
         <div className="w-full h-full">
             <Layout>
             <Routes>
-              {/* Map all primary routes to OnePage so the URL can change but render the same scrolling component */}
-              <Route path="/" element={<OnePage />} />
-              <Route path="/services" element={<OnePage />} />
-              <Route path="/training" element={<OnePage />} />
-              <Route path="/simulation" element={<OnePage />} />
-              <Route path="/products" element={<OnePage />} />
-              <Route path="/trainers" element={<OnePage />} />
-              <Route path="/events" element={<OnePage />} />
-              <Route path="/contact" element={<OnePage />} />
-
-              {/* Service Deep Links */}
-              <Route path="/services/hr-od" element={<HR_OD />} />
-              <Route path="/services/scm" element={<SCM />} />
-              <Route path="/services/ipa" element={<IPA />} />
-              <Route path="/services/ppm" element={<PPM />} />
-              <Route path="/services/mrbd" element={<MRBD />} />
+              {/* The public site stays mounted while service details slide over it. */}
+              <Route element={<ServiceExperience />}>
+                <Route path="/" element={null} />
+                <Route path="/services" element={null} />
+                <Route path="/training" element={null} />
+                <Route path="/simulation" element={null} />
+                <Route path="/products" element={null} />
+                <Route path="/trainers" element={null} />
+                <Route path="/events" element={null} />
+                <Route path="/contact" element={null} />
+                <Route path="/services/hr-od" element={null} />
+                <Route path="/services/scm" element={null} />
+                <Route path="/services/ipa" element={null} />
+                <Route path="/services/ppm" element={null} />
+                <Route path="/services/mrbd" element={null} />
+                <Route path="/training/:trainingId" element={null} />
+              </Route>
 
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/lms/login" element={<LMSLogin />} />

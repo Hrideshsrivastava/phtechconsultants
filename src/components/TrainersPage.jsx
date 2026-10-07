@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import SectionReveal from './SectionReveal';
 import vivekMathurImg from '../assets/vivek_mathur_image.jpg';
+import aakanshaJoshiImg from '../assets/aakansha_joshi.jpeg';
+import sunitaGroverImg from '../assets/sunita_grover.jpg';
+import komalImg from '../assets/komal.jpeg'
+import vivekImg from '../assets/vivek.png'
 
 const trainers = [
     {
@@ -12,7 +16,8 @@ const trainers = [
         highlights: ["Trained 5000+ Professionals Globally", "Visiting Faculty – IIT Roorkee", "Gold Medallist HR Manager", "Author of Performance Management papers"],
         focus: "Telecom, PSU, Education sectors",
         bio: "Mr. Vivek is a seasoned competence development strategist and a People development professional of international repute. He has conducted training programs for top Telecom MNC’s & many reputed Indian organizations. Vivek with consistently ranked among top performers, his presentations and workshops are well known for high quality content backed by his unique and engaging style of delivery. His energizing sessions are insightful and stimulate participants to unleash their innate energies, explore their potential and create an intense desire for performance excellence.",
-        links: { linkedin: "in.linkedin.com/in/vivekksindia/", youtube: "http://youtu.be/7VmmiF2pAlo" }
+        links: { linkedin: "in.linkedin.com/in/vivekksindia/", youtube: "http://youtu.be/7VmmiF2pAlo" },
+        image:vivekImg
     },
     {
         name: "Vivek Mathur",
@@ -39,13 +44,49 @@ const trainers = [
         image: vivekMathurImg
     },
     {
-        name: "Dr. P.C. Srivastava",
-        role: "Senior Consultant",
-        experience: "Extensive Corporate Experience",
-        certifications: ["PhD in Business Administration"],
-        highlights: ["Corporate Strategy Advisory", "Sales Mechanism Architecture"],
-        focus: "Sales & Business Strategy",
-        bio: "Driving rigorous, data-backed sales architectures and high-level business strategy for transitioning enterprise clients."
+        name: "Aakansha Joshi",
+        role: "POSH & Corporate Compliance Consultant",
+        experience: "10+ Years Experience",
+        certifications: [
+            "Certified POSH Consultant – Pink & Blue Symbiotic Living",
+            "Company Secretary",
+            "Corporate Legal & Compliance Professional"
+        ],
+        highlights: [
+            "POSH compliance support for 30+ companies",
+            "Internal Committee setup and guidance",
+            "POSH policy design and implementation",
+            "Workplace investigations and inquiry handling",
+            "Awareness workshops across industries",
+            "Corporate governance and ethics advisory"
+        ],
+        focus: "POSH, Workplace Safety & Governance",
+        bio: "A corporate legal professional and certified POSH consultant with over a decade of experience in compliance, governance, and workplace sensitization. Her work focuses on practical, ethical, and solution-driven support for safer workplaces, including POSH implementation, Internal Committee readiness, policy development, sensitive inquiry handling, and employee awareness.",
+        image: aakanshaJoshiImg
+    },
+    {
+        name: "Sunita Grover",
+        role: "Corporate Yoga & Wellbeing Coach",
+        experience: "15+ Years Corporate Experience; 7+ Years Wellness Practice",
+        certifications: [
+            "Ph.D. Scholar in Yoga",
+            "M.A. Yoga & Science of Living",
+            "PG Diploma in Women Wellness",
+            "PG Diploma in Yogic Science & Yoga Therapy",
+            "Certified Diet & Nutrition Coach",
+            "Certified Pregnancy Yoga Teacher"
+        ],
+        highlights: [
+            "Trained 5000+ clients across age groups and geographies",
+            "Corporate wellness programme design and delivery",
+            "Chair Yoga, breathwork, meditation, and stress management",
+            "Posture correction, ergonomics, and mobility training",
+            "Women’s wellness and lifestyle-management programmes",
+            "Former corporate process and quality manager"
+        ],
+        focus: "Corporate Yoga, Fitness & Wellbeing",
+        bio: "A corporate yoga, fitness, and women’s wellbeing professional who combines extensive corporate experience with structured wellness practice. She designs adaptable programmes for working professionals addressing stress, posture, sedentary fatigue, mobility, and sustainable lifestyle habits through chair yoga, therapeutic yoga, breathwork, meditation, and empathetic coaching.",
+        image: sunitaGroverImg
     },
     {
         name: "Garima Arora",
@@ -63,16 +104,8 @@ const trainers = [
         certifications: ["Certified Executive Coach"],
         highlights: ["Emotional Intelligence Frameworks", "Soft Skills Amplification"],
         focus: "Human Values & Soft Skills",
-        bio: "Aligning human values with corporate deliverables through intensive soft-skills and behavioral coaching paradigms."
-    },
-    {
-        name: "A.K. Saha",
-        role: "SCM Strategist",
-        experience: "25+ Years Experience",
-        certifications: ["Supply Chain Optimization"],
-        highlights: ["Logistics Network Design", "Advanced Corporate Negotiation"],
-        focus: "Supply Chain & Negotiation",
-        bio: "Expertise in resolving critical supply chain bottlenecks and securing highly favorable corporate contracts through advanced negotiation tactics."
+        bio: "Aligning human values with corporate deliverables through intensive soft-skills and behavioral coaching paradigms.",
+        image: komalImg
     },
     {
         name: "Anil Kumar Kaushik",

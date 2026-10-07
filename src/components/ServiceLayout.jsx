@@ -13,10 +13,25 @@ const ServiceLayout = ({
     philosophy,
     offerings,
     approach,
-    impact
+    impact,
+    onBack
 }) => {
     return (
         <div className="flex flex-col mb-16">
+
+            <div className="max-w-6xl mx-auto w-full px-4 pt-6 pb-4">
+                <button
+                    type="button"
+                    onClick={onBack}
+                    className="group inline-flex items-center gap-3 rounded-lg border border-slate-300 bg-white/90 px-4 py-2.5 text-sm font-bold text-blue-900 shadow-sm backdrop-blur-sm transition-all hover:-translate-x-1 hover:border-blue-900 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2"
+                    aria-label="Return to the services section"
+                >
+                    <svg className="h-5 w-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Back to Services
+                </button>
+            </div>
 
             {/* Hero Section */}
             <SectionReveal className="bg-blue-900 text-white rounded-2xl p-8 md:p-12 lg:p-20 text-center mb-16 shadow-md mx-4 lg:mx-0 border border-blue-800">
@@ -89,12 +104,13 @@ const ServiceLayout = ({
                         >
                             Contact Advisory
                         </Link>
-                        <Link
-                            to="/services"
+                        <button
+                            type="button"
+                            onClick={onBack}
                             className="bg-white text-blue-900 font-bold py-4 px-10 rounded-lg shadow-sm border border-slate-300 hover:bg-slate-50 transition-colors"
                         >
-                            All Services
-                        </Link>
+                            Back to Services
+                        </button>
                     </div>
                 </div>
             </SectionReveal>

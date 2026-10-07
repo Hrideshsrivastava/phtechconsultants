@@ -1,7 +1,7 @@
 import React from 'react';
 import ServiceLayout from '../ServiceLayout';
 
-const PPM = () => {
+const PPM = ({ onBack }) => {
     return (
         <ServiceLayout
             title="Program & Project Management"
@@ -24,6 +24,7 @@ const PPM = () => {
                 "Clear Stakeholder Alignment",
                 "Structured Execution Culture"
             ]}
+            onBack={onBack}
         />
     );
 };

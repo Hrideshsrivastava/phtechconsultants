@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import SectionReveal from './SectionReveal';
 
 const consultingServices = [
@@ -31,6 +31,8 @@ const consultingServices = [
 ];
 
 const ServicesPage = () => {
+    const location = useLocation();
+
     return (
         <div className="flex flex-col w-full max-w-4xl mx-auto py-8">
 
@@ -51,6 +53,10 @@ const ServicesPage = () => {
                     <SectionReveal key={idx} delay={idx * 0.1}>
                         <Link
                             to={svc.path}
+                            state={{
+                                serviceTransition: true,
+                                returnTo: location.pathname
+                            }}
                             className="group block bg-white border border-slate-200 rounded-xl p-6 md:p-10 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
                         >
                             {/* Subtle hover indicator stripe */}

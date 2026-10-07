@@ -1,7 +1,7 @@
 import React from 'react';
 import ServiceLayout from '../ServiceLayout';
 
-const SCM = () => {
+const SCM = ({ onBack }) => {
     return (
         <ServiceLayout
             title="Supply Chain Services"
@@ -24,6 +24,7 @@ const SCM = () => {
                 "Improved Delivery Reliability",
                 "Structured Supply Discipline"
             ]}
+            onBack={onBack}
         />
     );
 };

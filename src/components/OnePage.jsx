@@ -10,10 +10,12 @@ import TrainersPage from './TrainersPage';
 import EventsPage from './EventsPage';
 import ContactPage from './ContactPage';
 
-const OnePage = () => {
+const OnePage = ({ preserveScroll = false }) => {
     const location = useLocation();
 
     useEffect(() => {
+        if (preserveScroll) return undefined;
+
         // Disable browser's native scroll restoration to prevent it from fighting our custom logic
         // and scrolling to the bottom (where it remembered you were on the previous page).
         if ('scrollRestoration' in window.history) {
@@ -34,7 +36,7 @@ const OnePage = () => {
         }, 150);
 
         return () => clearTimeout(timeoutId);
-    }, [location.pathname]);
+    }, [location.pathname, preserveScroll]);
 
     return (
         <div className="flex flex-col">

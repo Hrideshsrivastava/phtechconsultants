@@ -2,14 +2,29 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import ExpandingNavbar from './ExpandingNavbar';
 import Footer from './Footer';
+import ImageTrack from './ImageTrack';
 
 const Layout = ({ children, onNavClick, activePage }) => {
     const location = useLocation();
     const isGallery = location.pathname === '/gallery';
     const isTestPage = location.pathname.startsWith('/lms/tests/') && location.pathname !== '/lms/tests';
+    const isPublicSite = [
+        '/',
+        '/services',
+        '/training',
+        '/simulation',
+        '/products',
+        '/trainers',
+        '/events',
+        '/contact'
+    ].includes(location.pathname) || location.pathname.startsWith('/services/') || location.pathname.startsWith('/training/');
+    const isServicePage = location.pathname.startsWith('/services/');
+    const isTrainingPage = location.pathname.startsWith('/training/');
+    const extensionSide = isServicePage || isTrainingPage ? 'right' : null;
 
     return (
-        <div className="min-h-screen flex flex-col font-sans text-slate-800">
+        <div className="min-h-screen flex flex-col overflow-x-clip font-sans text-slate-800">
+            {isPublicSite && <ImageTrack extensionSide={extensionSide} />}
             {/* 
         Navbar wrapper ensures it stays fixed at the top with a high z-index.
         We pass the navigation props down to ExpandingNavbar.
@@ -30,7 +45,7 @@ const Layout = ({ children, onNavClick, activePage }) => {
             </main>
 
             {/* Footer stays at the bottom */}
-            {!isGallery && !isTestPage && <Footer onNavClick={onNavClick} />}
+            {!isGallery && !isTestPage && !isServicePage && !isTrainingPage && <Footer onNavClick={onNavClick} />}
         </div>
     );
 };

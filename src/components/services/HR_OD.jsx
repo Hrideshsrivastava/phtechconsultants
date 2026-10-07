@@ -1,7 +1,7 @@
 import React from 'react';
 import ServiceLayout from '../ServiceLayout';
 
-const HR_OD = () => {
+const HR_OD = ({ onBack }) => {
     return (
         <ServiceLayout
             title="Human Resources & Organizational Development"
@@ -23,6 +23,7 @@ const HR_OD = () => {
                 "Knowledge-Sharing Infrastructure",
                 "Stronger Service Delivery"
             ]}
+            onBack={onBack}
         />
     );
 };

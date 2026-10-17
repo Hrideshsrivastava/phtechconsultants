@@ -79,7 +79,7 @@ const HomePage = () => {
             <SectionReveal className="bg-blue-900/90 backdrop-blur-sm text-white rounded-2xl p-8 md:p-12 lg:p-20 text-center shadow-lg mx-4 md:mx-0 border border-blue-800/50">
                 <h2 className="text-3xl md:text-4xl font-extrabold mb-6 tracking-tight">Why Organizations Engage Us</h2>
                 <p className="text-lg md:text-xl text-blue-100 leading-relaxed font-light max-w-4xl mx-auto">
-                    Organizations partner with PHTech Consultants when internal systems become misaligned with strategic intent. Whether addressing fragmented supply chains, capability gaps, or performance drift, we intervene with structured analysis and execution discipline.
+                    Organizations partner with PHTech Consultant when internal systems become misaligned with strategic intent. Whether addressing fragmented supply chains, capability gaps, or performance drift, we intervene with structured analysis and execution discipline.
                 </p>
             </SectionReveal>
 
@@ -88,10 +88,10 @@ const HomePage = () => {
                 <SectionReveal className="text-center mb-16 max-w-4xl mx-auto">
                     <span className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4 block">Firm Overview</span>
                     <h2 className="text-3xl md:text-5xl font-extrabold text-blue-900 mb-6 tracking-tight">
-                        PHTech Consultants
+                        PHTech Consultant
                     </h2>
                     <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium">
-                        PHTech Consultants is a specialized management and technical advisory firm operating at the intersection of strategy, structure, and execution. We serve manufacturing, service, telecom, PSU, and academic institutions across India.
+                        PHTech Consultant is a specialized management and technical advisory firm operating at the intersection of strategy, structure, and execution. We serve manufacturing, service, telecom, PSU, and academic institutions across India.
                     </p>
                 </SectionReveal>
 
@@ -125,7 +125,7 @@ const HomePage = () => {
                                 <div>
                                     <h4 className="text-xl font-bold text-slate-900 mb-2">Sector-Specific Expertise</h4>
                                     <p className="text-slate-600 leading-relaxed font-medium">
-                                        Consultants aligned to your industry vertical ensure contextual accuracy — not generic advice.
+                                        Consultant aligned to your industry vertical ensure contextual accuracy — not generic advice.
                                     </p>
                                 </div>
                             </div>

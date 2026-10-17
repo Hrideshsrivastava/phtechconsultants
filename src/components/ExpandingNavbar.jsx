@@ -117,7 +117,7 @@ const ExpandingNavbar = () => {
               onClick={(e) => handleNavClick(e, {id: 'home'})}
             >
               <span className="text-xl sm:text-2xl font-extrabold text-blue-900 tracking-tight">PHTech</span>
-              <span className="text-xl sm:text-2xl font-medium text-slate-500 ml-1">Consultants</span>
+              <span className="text-xl sm:text-2xl font-medium text-slate-500 ml-1">Consultant</span>
             </a>
           </div>
 

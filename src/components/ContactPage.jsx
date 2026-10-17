@@ -32,7 +32,7 @@ const ContactPage = () => (
                         <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-1">Connect On LinkedIn</h3>
                         <a href="https://www.linkedin.com/company/phtechconsultant/" target="_blank" rel="noopener noreferrer" className="block text-slate-900 font-bold text-base md:text-lg hover:text-blue-700 transition-colors">
                             <span className="md:hidden">LinkedIn</span>
-                            <span className="hidden md:inline">PH Tech Consultants</span>
+                            <span className="hidden md:inline">PHTechConsultant</span>
                         </a>
                     </div>
                 </div>

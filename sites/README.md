@@ -7,6 +7,7 @@ The main PH Tech Consultants site stays in the repository root and its Worker is
 phtechconsultants/            → main site (root folder, existing Worker)
 └── sites/
     ├── template/             → starter to copy for every new site
+    ├── employability-audit/  → Employability Audit programme mini-site
     └── <your-new-site>/      → its own Worker and link
 ```
 

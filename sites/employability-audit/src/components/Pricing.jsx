@@ -17,11 +17,11 @@ const quote = (selected) => {
     const separateTotal = codes.reduce((sum, code) => sum + modulesByCode[code].price, 0);
 
     if (exact) {
-        return { packageName: `${exact.code} – ${exact.title}`, label: exact.title, price: exact.price, savings: allStandalone ? separateTotal - exact.price : 0, extras: [] };
+        return { packageName: `${exact.code} – ${exact.title}`, label: exact.title, price: exact.price, savings: allStandalone ? separateTotal - exact.price : 0, included: exact.modules };
     }
     if (allStandalone) {
         const names = codes.map((code) => modulesByCode[code].title);
-        return { packageName: `Modules: ${codes.join(' + ')}`, label: codes.length === 1 ? names[0] : 'Individual modules', price: separateTotal, savings: 0, extras: [] };
+        return { packageName: `Modules: ${codes.join(' + ')}`, label: codes.length === 1 ? names[0] : 'Individual stages', price: separateTotal, savings: 0, included: codes };
     }
     // M4/M5 are only sold in bundles: suggest the cheapest bundle that covers everything picked.
     const fit = knownTiers
@@ -32,14 +32,15 @@ const quote = (selected) => {
         label: fit.title,
         price: fit.price,
         savings: 0,
-        extras: fit.modules.filter((code) => !selected.has(code)),
-        note: 'Senior expert and panel rounds come as part of a bundle'
+        included: fit.modules,
+        note: 'Panel and expert interviews are only available in bundles, so this is the best-value bundle with everything you picked.'
     };
 };
 
 const Builder = ({ onSelect }) => {
     const [selected, setSelected] = useState(() => new Set(['M1', 'M2']));
     const result = useMemo(() => quote(selected), [selected]);
+    const order = modules.map((module) => module.code);
 
     const toggle = (code) => {
         setSelected((current) => {
@@ -107,12 +108,21 @@ const Builder = ({ onSelect }) => {
                                     You save {formatPrice(result.savings)}
                                 </motion.p>
                             )}
-                            {result.extras.length > 0 && (
-                                <p className="mt-4 text-sm text-blue-100">
-                                    {result.note}. This bundle also includes{' '}
-                                    <strong className="text-white">{result.extras.map((code) => modulesByCode[code].title).join(', ')}</strong>.
-                                </p>
-                            )}
+                            {result.note && <p className="mt-4 text-sm text-blue-100">{result.note}</p>}
+                            <p className="mt-6 text-xs font-bold uppercase tracking-widest text-blue-200">Includes</p>
+                            <ul className="mt-3 space-y-2">
+                                {[...result.included].sort((a, b) => order.indexOf(a) - order.indexOf(b)).map((code) => (
+                                    <li key={code} className="flex items-center gap-2 text-sm">
+                                        <span className="grid h-5 w-5 flex-shrink-0 place-items-center rounded-full bg-white/15">
+                                            <Icon name="check" className="h-3 w-3" />
+                                        </span>
+                                        <span className="font-medium">{modulesByCode[code].title}</span>
+                                        {!selected.has(code) && (
+                                            <span className="rounded-full bg-amber-400/20 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-amber-300">Added</span>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
                         </motion.div>
                     ) : (
                         <motion.p key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative font-display text-xl text-blue-100">

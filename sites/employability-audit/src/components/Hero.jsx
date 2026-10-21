@@ -6,10 +6,10 @@ const rotatingWords = ['recruiters do.', 'the panel does.', 'HR does.', 'it cost
 
 const scoreAreas = [
     { label: 'Knowledge', color: 'bg-sky-500' },
-    { label: 'Communication', color: 'bg-emerald-500' },
+    { label: 'Communication', color: 'bg-violet-500' },
+    { label: 'Technical depth', color: 'bg-emerald-500' },
     { label: 'Resilience', color: 'bg-amber-400' },
-    { label: 'Presence', color: 'bg-violet-500' },
-    { label: 'Job fit & EQ', color: 'bg-rose-500' }
+    { label: 'Presence & EQ', color: 'bg-rose-500' }
 ];
 
 // Illustrative scores for the sample card; they shuffle to make the report feel alive.
@@ -69,35 +69,41 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 24 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                        className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-slate-900 sm:text-6xl lg:text-7xl"
+                        className="font-display text-[2.6rem] font-bold leading-[1.05] tracking-tight text-slate-900 sm:text-6xl lg:text-[4.1rem]"
                     >
                         Find your gaps
                         <br />
-                        before{' '}
-                        <span className="relative inline-block min-w-[6ch] text-blue-900">
-                            <AnimatePresence mode="wait">
-                                <motion.span
-                                    key={rotatingWords[wordIndex]}
-                                    initial={{ opacity: 0, y: 30, rotateX: -60 }}
-                                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                                    exit={{ opacity: 0, y: -30, rotateX: 60 }}
-                                    transition={{ duration: 0.45 }}
-                                    className="inline-block"
-                                >
-                                    {rotatingWords[wordIndex]}
-                                </motion.span>
-                            </AnimatePresence>
-                            <svg className="absolute -bottom-3 left-0 w-full" viewBox="0 0 300 20" fill="none" preserveAspectRatio="none" aria-hidden="true">
-                                <motion.path
-                                    d="M3 15 C 80 3, 200 3, 297 13"
-                                    stroke="#fbbf24"
-                                    strokeWidth="6"
-                                    strokeLinecap="round"
-                                    initial={{ pathLength: 0 }}
-                                    animate={{ pathLength: 1 }}
-                                    transition={{ duration: 1.1, delay: 0.7, ease: 'easeInOut' }}
-                                />
-                            </svg>
+                        before
+                        {/* All phrases share one grid cell so the line keeps the width/height of the longest one */}
+                        <span className="grid whitespace-nowrap pb-4 text-blue-900">
+                            {rotatingWords.map((word) => (
+                                <span key={word} className="invisible col-start-1 row-start-1" aria-hidden="true">{word}</span>
+                            ))}
+                            <span className="col-start-1 row-start-1">
+                                <AnimatePresence mode="wait">
+                                    <motion.span
+                                        key={rotatingWords[wordIndex]}
+                                        initial={{ opacity: 0, y: 30, rotateX: -60 }}
+                                        animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                                        exit={{ opacity: 0, y: -30, rotateX: 60 }}
+                                        transition={{ duration: 0.45 }}
+                                        className="relative inline-block"
+                                    >
+                                        {rotatingWords[wordIndex]}
+                                        <svg className="absolute left-0 top-full h-3 w-full sm:h-4" viewBox="0 0 300 20" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                                            <motion.path
+                                                d="M3 12 C 80 3, 200 3, 297 10"
+                                                stroke="#fbbf24"
+                                                strokeWidth="6"
+                                                strokeLinecap="round"
+                                                initial={{ pathLength: 0 }}
+                                                animate={{ pathLength: 1 }}
+                                                transition={{ duration: 0.8, delay: 0.3, ease: 'easeInOut' }}
+                                            />
+                                        </svg>
+                                    </motion.span>
+                                </AnimatePresence>
+                            </span>
                         </span>
                     </motion.h1>
 
@@ -107,8 +113,8 @@ const Hero = () => {
                         transition={{ duration: 0.8, delay: 0.25 }}
                         className="mt-8 max-w-xl text-lg leading-relaxed text-slate-600 md:text-xl"
                     >
-                        A five-stage audit that puts you through a real placement process (test, AI interview, group discussion,
-                        panel and a senior expert) and hands you a precise map of what to fix.
+                        A five-stage audit that puts you through a real placement process (online test, AI interview, group discussion,
+                        panel and an expert interview) and hands you a precise map of what to fix.
                     </motion.p>
 
                     <motion.div

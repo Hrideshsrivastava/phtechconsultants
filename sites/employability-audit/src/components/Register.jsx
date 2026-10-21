@@ -16,10 +16,8 @@ const emptyForm = {
     name: '',
     email: '',
     phone: '',
-    registeringAs: 'Student',
     institution: '',
     course: '',
-    participants: '',
     package: packageOptions[0],
     message: ''
 };
@@ -58,10 +56,8 @@ const buildSummary = (form) => [
     `Name: ${form.name}`,
     `Email: ${form.email}`,
     `Phone: ${form.phone}`,
-    `Registering as: ${form.registeringAs}`,
-    `College / organisation: ${form.institution}`,
+    `College / university: ${form.institution}`,
     form.course && `Course & year: ${form.course}`,
-    form.participants && `Participants: ${form.participants}`,
     `Package: ${form.package}`,
     form.message && `Message: ${form.message}`
 ].filter(Boolean).join('\n');
@@ -83,7 +79,6 @@ const Register = ({ selectedPackage }) => {
     }, [selectedPackage]);
 
     const update = (field) => (event) => setForm((current) => ({ ...current, [field]: event.target.value }));
-    const isInstitution = form.registeringAs !== 'Student';
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -108,7 +103,7 @@ const Register = ({ selectedPackage }) => {
         <section id="register" className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-blue-50 py-24 md:py-32">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <SectionHeading eyebrow="Registration" title="Claim your spot.">
-                    Students can register individually. Colleges and TPOs can book the audit for a whole batch.
+                    It takes under a minute. We'll call you to confirm your slot.
                 </SectionHeading>
 
                 <div className="grid gap-8 lg:grid-cols-[1fr_1.6fr]">
@@ -183,26 +178,7 @@ const Register = ({ selectedPackage }) => {
                                     </motion.div>
                                 ) : (
                                     <motion.form key="form" onSubmit={handleSubmit} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid gap-5 sm:grid-cols-2">
-                                        <div className="sm:col-span-2">
-                                            <span className="mb-2 block text-sm font-semibold text-slate-700">I'm registering as</span>
-                                            <div className="flex flex-wrap gap-2">
-                                                {['Student', 'College / TPO', 'Organisation'].map((option) => (
-                                                    <button
-                                                        key={option}
-                                                        type="button"
-                                                        onClick={() => setForm((current) => ({ ...current, registeringAs: option }))}
-                                                        className={`relative rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${form.registeringAs === option ? 'text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
-                                                    >
-                                                        {form.registeringAs === option && (
-                                                            <motion.span layoutId="role-pill" className="absolute inset-0 rounded-full bg-blue-900" transition={{ type: 'spring', stiffness: 400, damping: 30 }} />
-                                                        )}
-                                                        <span className="relative">{option}</span>
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        <Field label={isInstitution ? 'Contact person' : 'Full name'}>
+                                        <Field label="Full name">
                                             <input required value={form.name} onChange={update('name')} className={inputClass} placeholder="Your name" autoComplete="name" />
                                         </Field>
                                         <Field label="Phone">
@@ -211,18 +187,12 @@ const Register = ({ selectedPackage }) => {
                                         <Field label="Email" className="sm:col-span-2">
                                             <input required type="email" value={form.email} onChange={update('email')} className={inputClass} placeholder="you@example.com" autoComplete="email" />
                                         </Field>
-                                        <Field label={isInstitution ? 'Institution / organisation' : 'College / university'}>
-                                            <input required value={form.institution} onChange={update('institution')} className={inputClass} placeholder={isInstitution ? 'Organisation name' : 'College name'} />
+                                        <Field label="College / university">
+                                            <input required value={form.institution} onChange={update('institution')} className={inputClass} placeholder="College name" />
                                         </Field>
-                                        {isInstitution ? (
-                                            <Field label="Approx. participants">
-                                                <input type="number" min="1" value={form.participants} onChange={update('participants')} className={inputClass} placeholder="e.g. 250" />
-                                            </Field>
-                                        ) : (
-                                            <Field label="Course & year">
-                                                <input value={form.course} onChange={update('course')} className={inputClass} placeholder="e.g. B.Tech CSE, 4th year" />
-                                            </Field>
-                                        )}
+                                        <Field label="Course & year">
+                                            <input value={form.course} onChange={update('course')} className={inputClass} placeholder="e.g. B.Tech CSE, 4th year" />
+                                        </Field>
                                         <Field label="Package" className="sm:col-span-2">
                                             <motion.select
                                                 value={form.package}

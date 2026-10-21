@@ -12,7 +12,7 @@ export const moduleColors = {
     rose: { bg: 'bg-rose-500', soft: 'bg-rose-50', text: 'text-rose-700', ring: 'ring-rose-200' }
 };
 
-const marqueeItems = ['Proctored Online Test', 'AI Video Interview', 'Group Discussion', 'Panel Interview', 'Senior Expert CXO Round', 'Personal Growth Map'];
+const marqueeItems = ['Proctored Online Test', 'AI Video Interview', 'Group Discussion', 'Panel Interview', 'Expert Interview', 'Personal Growth Map'];
 
 export const Marquee = () => (
     <div className="relative -rotate-1 overflow-hidden bg-blue-900 py-5 shadow-xl">
@@ -27,7 +27,7 @@ export const Marquee = () => (
     </div>
 );
 
-const Counter = ({ value, suffix }) => {
+const Counter = ({ value, prefix = '', suffix = '' }) => {
     const ref = useRef(null);
     const inView = useInView(ref, { once: true });
     const [display, setDisplay] = useState(0);
@@ -38,7 +38,7 @@ const Counter = ({ value, suffix }) => {
         return () => controls.stop();
     }, [inView, value]);
 
-    return <span ref={ref}>{display}{suffix}</span>;
+    return <span ref={ref}>{prefix}{display}{suffix}</span>;
 };
 
 const Timeline = () => {
@@ -101,7 +101,7 @@ const Outline = () => (
                     <Reveal key={stat.label} delay={idx * 0.08}>
                         <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
                             <p className="font-display text-4xl font-bold text-blue-900 md:text-5xl">
-                                <Counter value={stat.value} suffix={stat.suffix} />
+                                <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
                             </p>
                             <p className="mt-2 text-sm font-semibold text-slate-500">{stat.label}</p>
                         </div>
@@ -125,8 +125,8 @@ const Outline = () => (
             <div className="mt-28 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
                 <Reveal>
                     <div className="h-full rounded-3xl bg-gradient-to-br from-blue-900 to-blue-950 p-8 text-white shadow-xl md:p-10">
-                        <h3 className="font-display text-2xl font-bold">How it's delivered</h3>
-                        <p className="mt-2 text-blue-100">A modular workshop, so institutions can schedule it the way that suits them.</p>
+                        <h3 className="font-display text-2xl font-bold">How it works</h3>
+                        <p className="mt-2 text-blue-100">Every stage is a private session that's about you and nobody else.</p>
                         <dl className="mt-8 grid gap-6 sm:grid-cols-2">
                             {deliveryFacts.map((fact) => (
                                 <div key={fact.label} className="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">

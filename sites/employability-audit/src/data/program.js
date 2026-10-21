@@ -29,9 +29,9 @@ export const modules = [
     },
     {
         code: 'M2',
-        title: 'AI Video Interview & Behavioral Audit',
-        gap: 'Presence & Behaviour Gap',
-        description: 'An AI-driven video interview that reads body language, posture and vocal habits, with video-ready feedback.',
+        title: 'AI Video Interview',
+        gap: 'Communication & Technical Depth Gap',
+        description: 'An AI-led video interview that checks how clearly you communicate and how deep your technical knowledge really goes.',
         price: 799,
         standalone: true,
         icon: 'camera',
@@ -40,8 +40,8 @@ export const modules = [
     {
         code: 'M3',
         title: 'Group Discussion & Situational Audit',
-        gap: 'Communication & Collaboration Gap',
-        description: 'Live group discussions and situational challenges that test how you think, speak and collaborate under pressure.',
+        gap: 'Collaboration & Situation Handling Gap',
+        description: 'A live group discussion and situational challenges that test how you think, speak up and collaborate under pressure.',
         price: 599,
         standalone: true,
         icon: 'group',
@@ -59,9 +59,9 @@ export const modules = [
     },
     {
         code: 'M5',
-        title: 'Senior Expert CXO Interview',
-        gap: 'Job Alignment & Emotional Intelligence Gap',
-        description: 'A one-on-one with a senior industry expert, calibrated for 20 LPA+ roles, on mindset, attitude and job fit.',
+        title: 'Expert Interview',
+        gap: 'Body Language, Job Fit & EQ Gap',
+        description: 'A one-on-one with a senior industry expert who reads your body language, presence and attitude, and checks your fit for the roles you want, including 20 LPA+ roles.',
         price: 999,
         standalone: false,
         icon: 'star',
@@ -74,10 +74,10 @@ export const modulesByCode = Object.fromEntries(modules.map((module) => [module.
 // `modules: null` means the bundle's contents are confirmed on enquiry.
 export const tiers = [
     { code: 'Tier 1', title: 'Digital & AI Audit', modules: ['M1', 'M2'], price: 1099 },
-    { code: 'Tier 2', title: 'Online Test + Senior Expert', modules: ['M1', 'M5'], price: 1199 },
+    { code: 'Tier 2', title: 'Online Test + Expert Interview', modules: ['M1', 'M5'], price: 1199 },
     { code: 'Tier 3', title: 'AI & Group Readiness', modules: ['M1', 'M2', 'M3'], price: 1599 },
-    { code: 'Tier 4', title: 'Online Test + AI Interview + Senior Expert', modules: ['M1', 'M2', 'M5'], price: 1999 },
-    { code: 'Tier 5', title: 'Online Test + AI Interview + GD + Senior Expert', modules: ['M1', 'M2', 'M3', 'M5'], price: 2499 },
+    { code: 'Tier 4', title: 'Online Test + AI Interview + Expert', modules: ['M1', 'M2', 'M5'], price: 1999 },
+    { code: 'Tier 5', title: 'Online Test + AI Interview + GD + Expert', modules: ['M1', 'M2', 'M3', 'M5'], price: 2499 },
     { code: 'Tier 6', title: 'Flagship 360° Employability Audit', modules: null, price: 2499, featured: true },
     { code: 'Tier 7', title: 'Comprehensive', modules: ['M1', 'M2', 'M3', 'M4', 'M5'], price: 2999 }
 ];
@@ -93,28 +93,28 @@ export const impacts = [
 ];
 
 export const deliveryFacts = [
-    { label: 'Duration', value: '1–3 Days' },
-    { label: 'Group size', value: '100–500 per group' },
-    { label: 'For', value: 'Placement interview aspirants' },
-    { label: 'Method', value: 'One-to-one & one-to-group exercises' }
+    { label: 'Format', value: 'One-on-one, just you and the assessor' },
+    { label: 'Who it\'s for', value: 'Students & graduates preparing for placements' },
+    { label: 'You walk away with', value: 'A gap report & a personal growth plan' },
+    { label: 'Flexible', value: 'Take a single stage or a full bundle' }
 ];
 
 export const stats = [
-    { value: 5, suffix: '', label: 'Audit modules' },
-    { value: 4, suffix: '', label: 'Gap areas mapped' },
-    { value: 500, suffix: '', label: 'Max. participants per group' },
-    { value: 3, suffix: ' days', label: 'Max. programme length' }
+    { value: 5, label: 'Audit stages' },
+    { value: 1, suffix: '-on-1', label: 'Private sessions' },
+    { value: 399, prefix: '₹', label: 'Starting price' },
+    { value: 7, label: 'Bundles to choose from' }
 ];
 
 export const nextLevel = [
-    'Consulting for individuals and teams, on demand',
-    'Extended workshop for faculty who prepare students for interviews'
+    'Personal consulting sessions with our experts, on demand',
+    'Pass the online test and get 50% off when you take it again'
 ];
 
+// Public seminar versions of the audit; the programme itself is one-on-one.
 export const videos = [
-    { id: '3nOw8B2hjOc', title: 'Employability Workshop', caption: 'See the audit in action', featured: true },
-    { id: '1-Qa3bJ4EAg', title: 'Mock Interview at NIFTEM', caption: 'Panel round, real pressure' },
-    { id: 'nS30vi6Rt54', title: 'Training at NIFTEM', caption: 'Workshop highlights' }
+    { id: '3nOw8B2hjOc', title: 'Employability Audit Seminar', caption: 'Live seminar' },
+    { id: '1-Qa3bJ4EAg', title: 'Mock Interview at NIFTEM', caption: 'Live seminar' }
 ];
 
 export const formatPrice = (value) => `₹${value.toLocaleString('en-IN')}`;

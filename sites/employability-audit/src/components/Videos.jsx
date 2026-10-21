@@ -5,11 +5,11 @@ import Icon from './Icon';
 import { videos } from '../data/program';
 
 // Shows the thumbnail first and only loads the YouTube player on click, keeping the page fast.
-const VideoCard = ({ video, large = false }) => {
+const VideoCard = ({ video }) => {
     const [playing, setPlaying] = useState(false);
 
     return (
-        <div className={`group relative overflow-hidden rounded-3xl bg-slate-900 shadow-xl ${large ? 'aspect-video lg:row-span-2 lg:aspect-auto lg:min-h-[28rem]' : 'aspect-video'}`}>
+        <div className="group relative aspect-video overflow-hidden rounded-3xl bg-slate-900 shadow-xl">
             {playing ? (
                 <iframe
                     className="absolute inset-0 h-full w-full"
@@ -33,15 +33,15 @@ const VideoCard = ({ video, large = false }) => {
                             <span className="absolute h-24 w-24 animate-ping rounded-full bg-amber-400/40" />
                             <motion.span
                                 whileHover={{ scale: 1.12 }}
-                                className={`relative grid place-items-center rounded-full bg-amber-400 text-blue-950 shadow-2xl ${large ? 'h-24 w-24' : 'h-16 w-16'}`}
+                                className="relative grid h-20 w-20 place-items-center rounded-full bg-amber-400 text-blue-950 shadow-2xl"
                             >
-                                <Icon name="play" filled className={large ? 'ml-1 h-10 w-10' : 'ml-1 h-7 w-7'} />
+                                <Icon name="play" filled className="ml-1 h-9 w-9" />
                             </motion.span>
                         </span>
                     </span>
                     <span className="absolute inset-x-0 bottom-0 p-6">
                         <span className="block text-xs font-bold uppercase tracking-widest text-amber-300">{video.caption}</span>
-                        <span className={`mt-1 block font-display font-bold text-white ${large ? 'text-3xl' : 'text-xl'}`}>{video.title}</span>
+                        <span className="mt-1 block font-display text-2xl font-bold text-white">{video.title}</span>
                     </span>
                 </button>
             )}
@@ -49,29 +49,32 @@ const VideoCard = ({ video, large = false }) => {
     );
 };
 
-const Videos = () => {
-    const featured = videos.find((video) => video.featured);
-    const others = videos.filter((video) => !video.featured);
-
-    return (
-        <section id="videos" className="py-24 md:py-32">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                <SectionHeading eyebrow="Videos" title="Watch it happen.">
-                    Real sessions, real candidates, real pressure. See what the audit feels like before you step in.
-                </SectionHeading>
-                <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-                    <Reveal className="lg:row-span-2">
-                        <VideoCard video={featured} large />
+const Videos = () => (
+    <section id="videos" className="py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading eyebrow="Videos" title="Watch it happen.">
+                Our trainer running live interviews in front of an audience at public seminars. It's the same pressure, the same questions and the same honest feedback.
+            </SectionHeading>
+            <div className="grid gap-6 md:grid-cols-2">
+                {videos.map((video, idx) => (
+                    <Reveal key={video.id} delay={0.1 * idx}>
+                        <VideoCard video={video} />
                     </Reveal>
-                    {others.map((video, idx) => (
-                        <Reveal key={video.id} delay={0.1 * (idx + 1)}>
-                            <VideoCard video={video} />
-                        </Reveal>
-                    ))}
-                </div>
+                ))}
             </div>
-        </section>
-    );
-};
+            <Reveal delay={0.2} className="mx-auto mt-10 max-w-2xl">
+                <div className="flex items-start gap-4 rounded-2xl border border-blue-900/10 bg-blue-50 p-5 text-left">
+                    <span className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-blue-900 text-white">
+                        <Icon name="shield" className="h-5 w-5" />
+                    </span>
+                    <p className="text-slate-700">
+                        <strong className="text-slate-900">Your audit is private.</strong> The videos show public seminar versions.
+                        When you register, every stage is a one-on-one session with no audience.
+                    </p>
+                </div>
+            </Reveal>
+        </div>
+    </section>
+);
 
 export default Videos;

@@ -3,10 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Reveal, { SectionHeading } from './Reveal';
 import Icon from './Icon';
 import { isFirebaseConfigured, saveRegistration } from '../firebase';
-import { contact, earlyBird, formatPrice, modules, tiers } from '../data/program';
+import { contact, modules, tiers } from '../data/program';
 
 export const packageOptions = [
-    `${earlyBird.title} (${formatPrice(earlyBird.price)})`,
     ...tiers.map((tier) => `${tier.code} – ${tier.title}`),
     ...modules.filter((module) => module.standalone).map((module) => `${module.code} – ${module.title}`),
     'Not sure yet – please advise me'

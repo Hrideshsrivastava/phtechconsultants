@@ -71,18 +71,15 @@ export const modules = [
 
 export const modulesByCode = Object.fromEntries(modules.map((module) => [module.code, module]));
 
-// `modules: null` means the bundle's contents are confirmed on enquiry.
 export const tiers = [
     { code: 'Tier 1', title: 'Digital & AI Audit', modules: ['M1', 'M2'], price: 1099 },
     { code: 'Tier 2', title: 'Online Test + Expert Interview', modules: ['M1', 'M5'], price: 1199 },
     { code: 'Tier 3', title: 'AI & Group Readiness', modules: ['M1', 'M2', 'M3'], price: 1599 },
     { code: 'Tier 4', title: 'Online Test + AI Interview + Expert', modules: ['M1', 'M2', 'M5'], price: 1999 },
     { code: 'Tier 5', title: 'Online Test + AI Interview + GD + Expert', modules: ['M1', 'M2', 'M3', 'M5'], price: 2499 },
-    { code: 'Tier 6', title: 'Flagship 360° Employability Audit', modules: null, price: 2499, featured: true },
+    { code: 'Tier 6', title: 'Flagship 360° Employability Audit', modules: ['M1', 'M3', 'M4', 'M5'], price: 2499, featured: true },
     { code: 'Tier 7', title: 'Comprehensive', modules: ['M1', 'M2', 'M3', 'M4', 'M5'], price: 2999 }
 ];
-
-export const earlyBird = { title: 'Early Bird Bundle', price: 2199 };
 
 export const impacts = [
     { title: 'Exposes Hidden Blind Spots', text: 'Replaces guesswork with hard data, catching critical skill gaps before real recruiters do.', icon: 'eye' },

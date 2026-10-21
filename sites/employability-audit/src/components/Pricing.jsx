@@ -3,16 +3,14 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Reveal, { SectionHeading } from './Reveal';
 import Icon from './Icon';
 import { moduleColors } from './Outline';
-import { earlyBird, formatPrice, modules, modulesByCode, tiers } from '../data/program';
-
-const knownTiers = tiers.filter((tier) => tier.modules);
+import { formatPrice, modules, modulesByCode, tiers } from '../data/program';
 
 // Works out the best way to buy the selected modules.
 const quote = (selected) => {
     const codes = [...selected];
     if (!codes.length) return null;
 
-    const exact = knownTiers.find((tier) => tier.modules.length === codes.length && codes.every((code) => tier.modules.includes(code)));
+    const exact = tiers.find((tier) => tier.modules.length === codes.length && codes.every((code) => tier.modules.includes(code)));
     const allStandalone = codes.every((code) => modulesByCode[code].standalone);
     const separateTotal = codes.reduce((sum, code) => sum + modulesByCode[code].price, 0);
 
@@ -24,7 +22,7 @@ const quote = (selected) => {
         return { packageName: `Modules: ${codes.join(' + ')}`, label: codes.length === 1 ? names[0] : 'Individual stages', price: separateTotal, savings: 0, included: codes };
     }
     // M4/M5 are only sold in bundles: suggest the cheapest bundle that covers everything picked.
-    const fit = knownTiers
+    const fit = tiers
         .filter((tier) => codes.every((code) => tier.modules.includes(code)))
         .sort((a, b) => a.price - b.price)[0];
     return {
@@ -157,15 +155,11 @@ const TierCard = ({ tier, index, onSelect }) => (
             <h3 className="mt-2 font-display text-xl font-bold leading-snug">{tier.title}</h3>
             <p className="mt-4 font-display text-4xl font-bold">{formatPrice(tier.price)}</p>
             <div className="mt-5 flex flex-grow flex-wrap content-start gap-2">
-                {tier.modules ? (
-                    tier.modules.map((code) => (
-                        <span key={code} className={`rounded-full px-3 py-1 text-xs font-semibold ${moduleColors[modulesByCode[code].color].soft} ${moduleColors[modulesByCode[code].color].text}`}>
-                            {modulesByCode[code].title}
-                        </span>
-                    ))
-                ) : (
-                    <span className="text-sm font-medium">Our signature all-round 360° audit. Ask us for the full breakdown.</span>
-                )}
+                {tier.modules.map((code) => (
+                    <span key={code} className={`rounded-full px-3 py-1 text-xs font-semibold ${moduleColors[modulesByCode[code].color].soft} ${moduleColors[modulesByCode[code].color].text}`}>
+                        {modulesByCode[code].title}
+                    </span>
+                ))}
             </div>
             <button
                 type="button"
@@ -184,35 +178,6 @@ const Pricing = ({ onSelect }) => (
             <SectionHeading eyebrow="Pricing" title="Start small or go all in.">
                 Take one stage on its own, or bundle them and save. Every plan ends with a clear picture of where you stand.
             </SectionHeading>
-
-            {/* Early bird banner */}
-            <Reveal className="mb-12">
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-rose-500 via-amber-400 to-amber-300 p-[2px]">
-                    <div className="flex flex-col items-center justify-between gap-4 rounded-[calc(1.5rem-2px)] bg-white px-6 py-5 text-center sm:flex-row sm:text-left">
-                        <div className="flex items-center gap-4">
-                            <motion.span
-                                animate={{ rotate: [0, -12, 12, -8, 0] }}
-                                transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 2.5 }}
-                                className="text-4xl"
-                                aria-hidden="true"
-                            >
-                                🐦
-                            </motion.span>
-                            <div>
-                                <p className="font-display text-xl font-bold text-slate-900">{earlyBird.title} · {formatPrice(earlyBird.price)}</p>
-                                <p className="text-sm text-slate-500">Limited-period offer for early registrations.</p>
-                            </div>
-                        </div>
-                        <button
-                            type="button"
-                            onClick={() => onSelect(`${earlyBird.title} (${formatPrice(earlyBird.price)})`)}
-                            className="flex-shrink-0 rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
-                        >
-                            Grab early bird
-                        </button>
-                    </div>
-                </div>
-            </Reveal>
 
             <Reveal className="mb-20">
                 <Builder onSelect={onSelect} />

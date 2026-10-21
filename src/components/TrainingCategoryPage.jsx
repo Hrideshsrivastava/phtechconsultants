@@ -97,12 +97,20 @@ const TrainingCategoryPage = ({ category, onBack }) => (
         </SectionReveal>
 
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-stretch gap-8 px-4 md:grid-cols-2 lg:grid-cols-3">
-            {category.workshops.map((workshop, index) => (
-                <SectionReveal key={workshop.id} delay={index * 0.1} className="h-full">
-                    <WorkshopCard workshop={workshop} />
-                </SectionReveal>
-            ))}
-        </div>
+    {category.workshops.map((workshop, index) => {
+        const isSingle = category.workshops.length === 1;
+        
+        return (
+            <SectionReveal 
+                key={workshop.id} 
+                delay={index * 0.1} 
+                className={`h-full ${isSingle ? 'md:col-span-2 lg:col-span-3' : ''}`}
+            >
+                <WorkshopCard workshop={workshop} />
+            </SectionReveal>
+        );
+    })}
+</div>
 
         <SectionReveal delay={0.2} className="mt-20 text-center">
             <h2 className="mb-4 text-3xl font-bold tracking-tight text-slate-900">Build the Right Programme Mix</h2>

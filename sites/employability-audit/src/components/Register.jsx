@@ -84,6 +84,7 @@ const Register = ({ selectedPackage }) => {
         setSubmittedName(form.name.split(' ')[0]);
         setSummary(buildSummary(form));
         if (!isFirebaseConfigured) {
+            console.warn('Registration not saved: the VITE_FIREBASE_* build variables were not set when this site was built.');
             setStatus('fallback');
             return;
         }
@@ -93,7 +94,8 @@ const Register = ({ selectedPackage }) => {
             setStatus('done');
             setForm(emptyForm);
         } catch (error) {
-            console.error('Registration could not be saved', error);
+            // permission-denied here means the Firestore rule for employabilityRegistrations is missing
+            console.error(`Registration could not be saved (${error.code || 'unknown error'})`, error);
             setStatus('fallback');
         }
     };
@@ -153,7 +155,7 @@ const Register = ({ selectedPackage }) => {
                                     <motion.div key="fallback" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex h-full min-h-[30rem] flex-col items-center justify-center text-center">
                                         <h3 className="font-display text-2xl font-bold text-slate-900">One last step</h3>
                                         <p className="mt-3 max-w-md text-slate-600">
-                                            We couldn't submit the form automatically. Send your details to us with one tap; they're already filled in.
+                                            Send us your details with one tap. Everything you entered is already filled in, so just hit send.
                                         </p>
                                         <div className="mt-8 flex flex-wrap justify-center gap-4">
                                             <a

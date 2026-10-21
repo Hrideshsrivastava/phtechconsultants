@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import SiteSearch from './SiteSearch';
 
 const navItems = [
   { id: 'home', label: 'Home' },
@@ -140,6 +141,7 @@ const ExpandingNavbar = () => {
                 </a>
               );
             })}
+            <SiteSearch />
           </div>
 
           {/* Mobile menu button */}
@@ -153,6 +155,7 @@ const ExpandingNavbar = () => {
                 {currentSectionLabel}
               </span>
             )}
+            <SiteSearch onOpen={() => setIsMobileMenuOpen(false)} />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-blue-900 hover:bg-slate-100 focus:outline-none"

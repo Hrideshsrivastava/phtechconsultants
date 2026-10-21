@@ -47,12 +47,27 @@ const WorkshopCard = ({ workshop }) => (
             </div>
 
             <div className="mt-6 flex flex-col gap-3">
+                {workshop.detailsUrl && (
+                    <a
+                        href={workshop.detailsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-blue-900 bg-blue-900 py-2.5 text-center font-bold text-white transition-colors duration-300 hover:bg-blue-800"
+                        aria-label={`More details about ${workshop.title} (opens in a new tab)`}
+                    >
+                        More Details
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                )}
+
                 {workshop.pdfUrl && (
                     <a
                         href={workshop.pdfUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-blue-900 bg-blue-900 py-2.5 text-center font-bold text-white transition-colors duration-300 hover:bg-blue-800"
+                        className={`inline-flex w-full items-center justify-center gap-2 rounded-md border border-blue-900 py-2.5 text-center font-bold transition-colors duration-300 ${workshop.detailsUrl ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-900 text-white hover:bg-blue-800'}`}
                         aria-label={`View ${workshop.title} programme PDF in a new tab`}
                     >
                         <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

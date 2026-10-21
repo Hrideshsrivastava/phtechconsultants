@@ -135,7 +135,8 @@ export const trainingCategories = [
                 target: "Institutions & Corporate HR",
                 duration: "Custom",
                 group: "Organization-wide",
-                pdfUrl: "/Employability%20Audit%20-Program.pdf"
+                pdfUrl: "/Employability%20Audit%20-Program.pdf",
+                detailsUrl: "https://employability.phtechconsultant.com/"
             }
         ]
     },

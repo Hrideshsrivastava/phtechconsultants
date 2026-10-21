@@ -1,5 +1,6 @@
 import React from 'react';
 import SectionReveal from './SectionReveal';
+import ContactForm from './ContactForm';
 
 const ContactPage = () => (
     <div className="flex flex-col max-w-4xl mx-auto py-12 px-4">
@@ -65,8 +66,18 @@ const ContactPage = () => (
                     </div>
                 </div>
             </div>
+        </SectionReveal>
 
-
+        <SectionReveal className="mt-8 bg-white p-6 md:p-12 rounded-2xl shadow-sm border border-slate-200">
+            <div className="text-center mb-8">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-blue-900 tracking-tight">Send Us an Enquiry</h2>
+                <p className="mt-3 text-slate-600 font-medium max-w-xl mx-auto">
+                    Tell us what you're looking for and our team will get back to you directly.
+                </p>
+            </div>
+            <div className="max-w-2xl mx-auto">
+                <ContactForm />
+            </div>
         </SectionReveal>
     </div>
 );

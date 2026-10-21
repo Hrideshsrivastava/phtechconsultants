@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { consultingServices } from '../data/services';
 import SectionReveal from './SectionReveal';
 
 /**
@@ -16,6 +17,10 @@ const ServiceLayout = ({
     impact,
     onBack
 }) => {
+    const { pathname } = useLocation();
+    // Pre-selects this service in the contact form's "I'm interested in" field
+    const enquiryInterest = consultingServices.find((service) => service.path === pathname)?.title || title;
+
     return (
         <div className="flex flex-col mb-16">
 
@@ -100,6 +105,7 @@ const ServiceLayout = ({
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
                         <Link
                             to="/contact"
+                            state={{ interest: enquiryInterest }}
                             className="bg-blue-900 text-white font-bold py-4 px-10 rounded-lg shadow-sm hover:bg-blue-800 transition-colors"
                         >
                             Contact Advisory

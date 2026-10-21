@@ -77,7 +77,7 @@ const WorkshopCard = ({ workshop }) => (
                     </a>
                 )}
 
-                <Link to="/contact" className="block w-full rounded-md border border-blue-100 bg-blue-50 py-2.5 text-center font-bold text-blue-900 transition-colors duration-300 hover:border-blue-900 hover:bg-blue-900 hover:text-white">
+                <Link to="/contact" state={{ interest: workshop.title }} className="block w-full rounded-md border border-blue-100 bg-blue-50 py-2.5 text-center font-bold text-blue-900 transition-colors duration-300 hover:border-blue-900 hover:bg-blue-900 hover:text-white">
                     Inquire Availability
                 </Link>
             </div>

@@ -90,6 +90,7 @@ const ProductsPage = () => {
                 </p>
                 <Link
                     to="/contact"
+                    state={{ interest: 'KRA Analysis Suite (demo)' }}
                     className="inline-block w-full sm:w-auto bg-blue-900 text-white font-bold py-4 px-10 rounded-lg shadow-sm hover:bg-blue-800 transition-colors"
                 >
                     Request Software Demo

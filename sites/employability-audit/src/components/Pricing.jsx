@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Reveal, { SectionHeading } from './Reveal';
 import Icon from './Icon';
-import { moduleColors } from './Outline';
+import { FormatBadge, moduleColors } from './Outline';
 import { formatPrice, modules, modulesByCode, tiers } from '../data/program';
 
 // Works out the best way to buy the selected modules.
@@ -71,7 +71,10 @@ const Builder = ({ onSelect }) => {
                                     <Icon name={module.icon} className="h-5 w-5" />
                                 </span>
                                 <span className="min-w-0 flex-grow">
-                                    <span className="block font-semibold text-slate-900">{module.title}</span>
+                                    <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                                        <span className="font-semibold text-slate-900">{module.title}</span>
+                                        <FormatBadge format={module.format} className="!px-2 !py-0.5 !text-[11px]" />
+                                    </span>
                                     <span className="block text-sm text-slate-500">
                                         {module.standalone ? formatPrice(module.price) : 'Bundle exclusive'}
                                         {module.perk && <span className="ml-2 font-semibold text-emerald-600">· {module.perk}</span>}

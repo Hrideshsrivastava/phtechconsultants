@@ -14,13 +14,15 @@ export const purpose =
     'This programme eliminates the gaps between academic knowledge and actual corporate expectations. It evaluates candidates ' +
     'under realistic corporate pressure to benchmark their skills, remove professional insecurities, and map out a precise growth trajectory.';
 
-// The gap each module uncovers; colours are Tailwind class fragments used across the page.
+// The gap each module uncovers and how it is run; colours are Tailwind class fragments used across the page.
+// Only the Expert Interview is one-on-one, so keep `format` accurate wherever a stage is described.
 export const modules = [
     {
         code: 'M1',
         title: 'Proctored Online Test',
         gap: 'Knowledge Gap',
         description: 'A timed, proctored test that benchmarks aptitude and domain knowledge against real placement standards.',
+        format: { mode: 'Online', detail: 'Proctored' },
         price: 399,
         standalone: true,
         perk: 'Pass and get 50% off your 2nd test',
@@ -32,6 +34,7 @@ export const modules = [
         title: 'AI Video Interview',
         gap: 'Communication & Technical Depth Gap',
         description: 'An AI-led video interview that checks how clearly you communicate and how deep your technical knowledge really goes.',
+        format: { mode: 'Online', detail: 'With an AI interviewer' },
         price: 799,
         standalone: true,
         icon: 'camera',
@@ -42,6 +45,7 @@ export const modules = [
         title: 'Group Discussion & Situational Audit',
         gap: 'Collaboration & Situation Handling Gap',
         description: 'A live group discussion and situational challenges that test how you think, speak up and collaborate under pressure.',
+        format: { mode: 'Live', detail: 'With other candidates' },
         price: 599,
         standalone: true,
         icon: 'group',
@@ -50,6 +54,7 @@ export const modules = [
     {
         code: 'M4',
         title: 'Panel Interview',
+        format: { mode: 'Live', detail: 'In front of a panel' },
         gap: 'Resilience & Situation Handling Gap',
         description: 'A realistic, high-pressure panel round that builds composure and structured thinking on the spot.',
         price: 999,
@@ -60,6 +65,7 @@ export const modules = [
     {
         code: 'M5',
         title: 'Expert Interview',
+        format: { mode: 'Live', detail: 'One-on-one' },
         gap: 'Body Language, Job Fit & EQ Gap',
         description: 'A one-on-one with a senior industry expert who reads your body language, presence and attitude, and checks your fit for the roles you want, including 20 LPA+ roles.',
         price: 999,
@@ -90,7 +96,6 @@ export const impacts = [
 ];
 
 export const deliveryFacts = [
-    { label: 'Format', value: 'One-on-one, just you and the assessor' },
     { label: 'Who it\'s for', value: 'Students & graduates preparing for placements' },
     { label: 'You walk away with', value: 'A gap report & a personal growth plan' },
     { label: 'Flexible', value: 'Take a single stage or a full bundle' }
@@ -98,7 +103,7 @@ export const deliveryFacts = [
 
 export const stats = [
     { value: 5, label: 'Audit stages' },
-    { value: 1, suffix: '-on-1', label: 'Private sessions' },
+    { value: 3, label: 'Live interview rounds' },
     { value: 399, prefix: '₹', label: 'Starting price' },
     { value: 7, label: 'Bundles to choose from' }
 ];
@@ -108,7 +113,7 @@ export const nextLevel = [
     'Pass the online test and get 50% off when you take it again'
 ];
 
-// Public seminar versions of the audit; the programme itself is one-on-one.
+// Public seminar versions of the audit, recorded in front of an audience.
 export const videos = [
     { id: '3nOw8B2hjOc', title: 'Employability Audit Seminar', caption: 'Live seminar' },
     { id: '1-Qa3bJ4EAg', title: 'Mock Interview at NIFTEM', caption: 'Live seminar' }

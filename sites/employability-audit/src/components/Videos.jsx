@@ -53,7 +53,7 @@ const Videos = () => (
     <section id="videos" className="py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <SectionHeading eyebrow="Videos" title="Watch it happen.">
-                Our trainer running live interviews in front of an audience at public seminars. It's the same pressure, the same questions and the same honest feedback.
+                Our trainer running live interviews in front of an audience at public seminars. You'll get the same kind of tough questions and honest feedback in your audit.
             </SectionHeading>
             <div className="grid gap-6 md:grid-cols-2">
                 {videos.map((video, idx) => (
@@ -68,8 +68,8 @@ const Videos = () => (
                         <Icon name="shield" className="h-5 w-5" />
                     </span>
                     <p className="text-slate-700">
-                        <strong className="text-slate-900">Your audit is private.</strong> The videos show public seminar versions.
-                        When you register, every stage is a one-on-one session with no audience.
+                        <strong className="text-slate-900">No audience in the real audit.</strong> These videos are from public seminars.
+                        In your audit, the group discussion is with other candidates, the panel interview is with our panel, and the expert interview is one-on-one.
                     </p>
                 </div>
             </Reveal>

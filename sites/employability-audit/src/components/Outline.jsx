@@ -12,6 +12,13 @@ export const moduleColors = {
     rose: { bg: 'bg-rose-500', soft: 'bg-rose-50', text: 'text-rose-700', ring: 'ring-rose-200' }
 };
 
+export const FormatBadge = ({ format, className = '', dark = false }) => (
+    <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ${dark ? 'bg-white/10 text-white' : 'bg-slate-100 text-slate-700'} ${className}`}>
+        <span className={`h-2 w-2 rounded-full ${format.mode === 'Live' ? 'bg-rose-500' : 'bg-sky-500'}`} />
+        {format.mode} · {format.detail}
+    </span>
+);
+
 const marqueeItems = ['Proctored Online Test', 'AI Video Interview', 'Group Discussion', 'Panel Interview', 'Expert Interview', 'Personal Growth Map'];
 
 export const Marquee = () => (
@@ -82,7 +89,8 @@ const Timeline = () => {
                                     <span className="text-xs font-bold uppercase tracking-widest text-slate-400">{module.gap}</span>
                                 </div>
                                 <h3 className="font-display text-2xl font-bold text-slate-900">{module.title}</h3>
-                                <p className="mt-2 leading-relaxed text-slate-600">{module.description}</p>
+                                <FormatBadge format={module.format} className="mt-3" />
+                                <p className="mt-3 leading-relaxed text-slate-600">{module.description}</p>
                             </motion.div>
                         </li>
                     );
@@ -126,12 +134,22 @@ const Outline = () => (
                 <Reveal>
                     <div className="h-full rounded-3xl bg-gradient-to-br from-blue-900 to-blue-950 p-8 text-white shadow-xl md:p-10">
                         <h3 className="font-display text-2xl font-bold">How it works</h3>
-                        <p className="mt-2 text-blue-100">Every stage is a private session that's about you and nobody else.</p>
-                        <dl className="mt-8 grid gap-6 sm:grid-cols-2">
+                        <p className="mt-2 text-blue-100">
+                            Each stage runs the way it does in real placements. Two are online and three are live, and only the expert interview is one-on-one.
+                        </p>
+                        <ul className="mt-8 divide-y divide-white/10 rounded-2xl bg-white/5 ring-1 ring-white/10">
+                            {modules.map((module) => (
+                                <li key={module.code} className="flex flex-wrap items-center justify-between gap-2 px-5 py-3">
+                                    <span className="font-semibold">{module.title}</span>
+                                    <FormatBadge format={module.format} dark />
+                                </li>
+                            ))}
+                        </ul>
+                        <dl className="mt-6 grid gap-4 sm:grid-cols-3">
                             {deliveryFacts.map((fact) => (
-                                <div key={fact.label} className="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+                                <div key={fact.label} className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
                                     <dt className="text-xs font-bold uppercase tracking-widest text-amber-300">{fact.label}</dt>
-                                    <dd className="mt-2 font-display text-xl font-semibold">{fact.value}</dd>
+                                    <dd className="mt-2 font-display font-semibold">{fact.value}</dd>
                                 </div>
                             ))}
                         </dl>

@@ -3,9 +3,6 @@
 export const MAIN_SITE_URL = 'https://phtechconsultant.com';
 
 export const contact = {
-    phone: '+91-9871291350',
-    phoneHref: 'tel:+919871291350',
-    whatsappHref: 'https://wa.me/919871291350',
     email: 'info@phtechconsultant.com'
 };
 

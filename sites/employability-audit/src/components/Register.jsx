@@ -120,10 +120,7 @@ const Register = ({ selectedPackage }) => {
                                 ))}
                             </ol>
                             <div className="mt-10 space-y-3 border-t border-white/10 pt-8">
-                                <p className="text-xs font-bold uppercase tracking-widest text-amber-300">Prefer to talk?</p>
-                                <a href={contact.phoneHref} className="flex items-center gap-3 font-semibold hover:text-amber-300">
-                                    <Icon name="phone" className="h-5 w-5" /> {contact.phone}
-                                </a>
+                                <p className="text-xs font-bold uppercase tracking-widest text-amber-300">Have a question?</p>
                                 <a href={`mailto:${contact.email}`} className="flex items-center gap-3 font-semibold hover:text-amber-300">
                                     <Icon name="mail" className="h-5 w-5" /> {contact.email}
                                 </a>
@@ -155,17 +152,9 @@ const Register = ({ selectedPackage }) => {
                                     <motion.div key="fallback" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex h-full min-h-[30rem] flex-col items-center justify-center text-center">
                                         <h3 className="font-display text-2xl font-bold text-slate-900">One last step</h3>
                                         <p className="mt-3 max-w-md text-slate-600">
-                                            Send us your details with one tap. Everything you entered is already filled in, so just hit send.
+                                            Send us your details by email with one tap. Everything you entered is already filled in, so just hit send and we'll contact you.
                                         </p>
                                         <div className="mt-8 flex flex-wrap justify-center gap-4">
-                                            <a
-                                                href={`${contact.whatsappHref}?text=${encodeURIComponent(summary)}`}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="rounded-full bg-emerald-500 px-6 py-3 font-bold text-white transition-transform hover:-translate-y-0.5"
-                                            >
-                                                Send on WhatsApp
-                                            </a>
                                             <a
                                                 href={`mailto:${contact.email}?subject=${encodeURIComponent('Employability Audit registration')}&body=${encodeURIComponent(summary)}`}
                                                 className="rounded-full bg-blue-900 px-6 py-3 font-bold text-white transition-transform hover:-translate-y-0.5"

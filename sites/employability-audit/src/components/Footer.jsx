@@ -18,7 +18,6 @@ const Footer = () => (
                 </a>
             </div>
             <div className="space-y-2 text-sm">
-                <a href={contact.phoneHref} className="flex items-center gap-2 hover:text-white"><Icon name="phone" className="h-4 w-4" /> {contact.phone}</a>
                 <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:text-white"><Icon name="mail" className="h-4 w-4" /> {contact.email}</a>
                 <p className="pt-3 text-xs text-slate-500">© {new Date().getFullYear()} PH Tech Consultants. All rights reserved.</p>
             </div>

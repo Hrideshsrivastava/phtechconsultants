@@ -31,15 +31,28 @@ documents in that collection. Add this inside `match /databases/{database}/docum
 **Firebase console → Firestore → Rules**:
 
 ```
-match /employabilityRegistrations/{id} {
-  allow create: if request.resource.data.name is string
-                && request.resource.data.email is string
-                && request.resource.data.phone is string;
+match /employabilityRegistrations/{registrationId} {
+  allow create: if isValidRegistration(request.resource.data);
   allow read, update, delete: if false;
+}
+
+function isValidRegistration(data) {
+  return data.keys().hasOnly(['name', 'email', 'phone', 'institution', 'course', 'package', 'message', 'source', 'createdAt'])
+    && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+    && data.email is string && data.email.size() > 3 && data.email.size() <= 200
+    && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 20
+    && data.institution is string && data.institution.size() > 0 && data.institution.size() <= 200
+    && data.course is string && data.course.size() <= 100
+    && data.package is string && data.package.size() <= 100
+    && data.message is string && data.message.size() <= 2000
+    && data.source is string && data.source.size() <= 100
+    && data.createdAt == request.time;
 }
 ```
 
 Also add the site's domain under **Firebase console → Authentication → Settings → Authorized domains**.
 
 If Firebase isn't configured or the save fails, the form doesn't lose the registration: it offers
-one-tap "Send on WhatsApp" / "Send by email" buttons with the details already filled in.
+a one-tap "Send by email" button with the details already filled in.
+
+The site deliberately shows no phone number; the team contacts registrants directly.

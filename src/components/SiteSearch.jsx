@@ -27,6 +27,7 @@ const SiteSearch = ({ onOpen }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const inputRef = useRef(null);
     const listRef = useRef(null);
+    const buttonRef = useRef(null);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -46,6 +47,8 @@ const SiteSearch = ({ onOpen }) => {
     // Ctrl/Cmd + K or "/" opens search from anywhere (except while typing in a field)
     useEffect(() => {
         const handleKeyDown = (event) => {
+            // The navbar renders a desktop and a mobile copy; only the one on screen answers the shortcut
+            if (!buttonRef.current?.offsetParent) return;
             const target = event.target;
             const isTyping = target instanceof HTMLElement && (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName));
             if ((event.key === 'k' && (event.metaKey || event.ctrlKey)) || (event.key === '/' && !isTyping)) {
@@ -202,6 +205,7 @@ const SiteSearch = ({ onOpen }) => {
     return (
         <>
             <button
+                ref={buttonRef}
                 type="button"
                 onClick={open}
                 className="inline-flex items-center gap-2 rounded-md p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-blue-900 focus:outline-none"

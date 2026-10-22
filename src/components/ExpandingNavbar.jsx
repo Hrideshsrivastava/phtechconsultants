@@ -117,13 +117,13 @@ const ExpandingNavbar = () => {
               className="flex-shrink-0 flex items-center cursor-pointer"
               onClick={(e) => handleNavClick(e, {id: 'home'})}
             >
-              <span className="text-xl sm:text-2xl font-extrabold text-blue-900 tracking-tight">PHTech</span>
-              <span className="text-xl sm:text-2xl font-medium text-slate-500 ml-1">Consultant</span>
+              <span className="text-lg min-[400px]:text-xl sm:text-2xl font-extrabold text-blue-900 tracking-tight">PHTech</span>
+              <span className="text-lg min-[400px]:text-xl sm:text-2xl font-medium text-slate-500 ml-1">Consultant</span>
             </a>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden xl:flex items-center space-x-6">
             {navItems.map((item) => {
               const isActive = isItemActive(item);
               
@@ -145,10 +145,10 @@ const ExpandingNavbar = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex items-center gap-1 md:hidden">
+          <div className="flex shrink-0 items-center gap-1 xl:hidden">
             {currentSectionLabel && (
               <span
-                className="max-w-[5.5rem] truncate text-xs font-bold uppercase tracking-wider text-blue-900 sm:max-w-none sm:text-sm"
+                className="hidden max-w-[5.5rem] truncate text-xs font-bold uppercase tracking-wider text-blue-900 min-[380px]:inline-block sm:max-w-none sm:text-sm"
                 aria-live="polite"
               >
                 <span className="sr-only">Current section: </span>
@@ -178,7 +178,7 @@ const ExpandingNavbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md absolute w-full left-0 top-20">
+        <div className="xl:hidden bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md absolute w-full left-0 top-20">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => {
               const isActive = isItemActive(item);

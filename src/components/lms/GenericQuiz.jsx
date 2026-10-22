@@ -6,6 +6,21 @@ import { db } from '../../firebase';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../../contexts/AuthContext';
 
+const EMPLOYABILITY_SITE_URL = 'https://employability.phtechconsultant.com/';
+
+const ImproveScoresButton = ({ className = '' }) => (
+    <a
+        href={EMPLOYABILITY_SITE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`inline-flex items-center justify-center gap-2 bg-blue-900 text-white font-bold py-3 px-8 rounded-xl shadow-md hover:bg-blue-800 hover:shadow-lg transition-all duration-300 ${className}`}
+        aria-label="Improve your scores with the Employability Audit (opens in a new tab)"
+    >
+        Improve Your Scores
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+    </a>
+);
+
 const GenericQuiz = () => {
     const { testId } = useParams();
     const navigate = useNavigate();
@@ -309,6 +324,10 @@ const GenericQuiz = () => {
                                         Retake Assessment
                                     </button>
                                 </div>
+                                <div className="mt-6 pt-6 border-t border-slate-200">
+                                    <p className="text-slate-500 font-medium mb-4">Want a better score? Our Employability Audit shows you where to improve.</p>
+                                    <ImproveScoresButton />
+                                </div>
                             </>
                         ) : (
                             <>
@@ -516,6 +535,11 @@ const GenericQuiz = () => {
                                     </div>
                                 </div>
                             </div>
+
+                            <div className="mt-12 pt-8 border-t border-slate-200 relative z-10">
+                                <p className="text-slate-600 font-medium mb-4">Want to raise these numbers? Our Employability Audit shows you exactly where to improve.</p>
+                                <ImproveScoresButton />
+                            </div>
                         </div>
                     </SectionReveal>
 
@@ -557,13 +581,14 @@ const GenericQuiz = () => {
                     </SectionReveal>
 
                     <SectionReveal>
-                        <div className="flex justify-center mt-8">
+                        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
                             <button 
                                 onClick={() => navigate(test.category ? `/lms/tests?category=${encodeURIComponent(test.category)}` : '/lms/tests')}
                                 className="bg-slate-800 text-white font-bold py-4 px-12 rounded-xl shadow-md hover:bg-slate-700 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                             >
                                 Return to Dashboard
                             </button>
+                            <ImproveScoresButton className="py-4 px-12 hover:-translate-y-1" />
                         </div>
                     </SectionReveal>
                 </div>

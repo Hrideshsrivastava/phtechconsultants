@@ -3,21 +3,57 @@
 
 <head>
   <meta charset="UTF-8" />
-  <!-- Corrected Favicon Link -->
-<link rel="icon" type="image/jpeg" href="/logophtc.jpeg" />
-<link rel="apple-touch-icon" href="/logophtc.jpeg" />
-
-<!-- Open Graph Tags for Search & Link Previews (WhatsApp, LinkedIn, Google) -->
-<meta property="og:title" content="PHTechConsultants" />
-<meta property="og:image" content="https://phtechconsultant.com/logophtc.jpeg" />
-<meta property="og:url" content="https://phtechconsultant.com" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PHTechConsultant</title>
+  <link rel="icon" type="image/jpeg" href="/logophtc.jpeg" />
+  <link rel="apple-touch-icon" href="/logophtc.jpeg" />
 
+  <!-- seo:start (replaced per page by scripts/prerender.js, kept in sync on navigation by SeoManager) -->
+  <title>PH Tech Consultants | HR Consulting, Corporate Training &amp; Employability Programmes</title>
+  <meta name="description" content="Noida-based consultancy for KRA-led performance planning, HR &amp; organisation development, corporate training workshops, business simulations and student employability assessments." />
+  <link rel="canonical" href="https://phtechconsultant.com/" />
+  <meta property="og:title" content="PH Tech Consultants | HR Consulting, Corporate Training &amp; Employability Programmes" />
+  <meta property="og:description" content="Noida-based consultancy for KRA-led performance planning, HR &amp; organisation development, corporate training workshops, business simulations and student employability assessments." />
+  <meta property="og:url" content="https://phtechconsultant.com/" />
+  <!-- seo:end -->
+
+  <!-- Open Graph / link previews (WhatsApp, LinkedIn, Google) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="PH Tech Consultants" />
+  <meta property="og:image" content="https://phtechconsultant.com/logophtc.jpeg" />
+  <meta name="twitter:card" content="summary" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "PH Tech Consultants",
+      "url": "https://phtechconsultant.com/",
+      "logo": "https://phtechconsultant.com/logophtc.jpeg",
+      "email": "info@phtechconsultant.com",
+      "telephone": "+91-120-4565227",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Noida",
+        "addressRegion": "Uttar Pradesh",
+        "addressCountry": "IN"
+      },
+      "sameAs": ["https://www.linkedin.com/company/phtechconsultant/"]
+    }
+  </script>
 </head>
 
 <body>
   <div id="root"></div>
+  <script>
+    // Pre-rendered pages carry the path they were built for. When the server falls back to this file for
+    // another route (e.g. the LMS), drop the stale markup so it doesn't flash before the app loads.
+    (function () {
+      var root = document.getElementById('root');
+      var built = root.getAttribute('data-prerendered');
+      var path = location.pathname.replace(/\/+$/, '') || '/';
+      if (built && built !== path) root.innerHTML = '';
+    })();
+  </script>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

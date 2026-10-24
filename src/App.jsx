@@ -12,6 +12,7 @@ import ProtectedRoute from './components/lms/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivacyPolicy from './components/legal/PrivacyPolicy';
 import TermsOfService from './components/legal/TermsOfService';
+import SeoManager from './components/SeoManager';
 
 // --- Scroll to top on route change ---
 const ScrollToTop = () => {
@@ -25,9 +26,9 @@ const ScrollToTop = () => {
   return null;
 };
 
-// --- Main App Component ---
+// --- Routes, shared by the browser and the build-time pre-renderer ---
 
-function App() {
+export function AppRoutes() {
   // Preload gallery images in the background as soon as the app loads
   useEffect(() => {
     imagesList.forEach((src) => {
@@ -37,9 +38,9 @@ function App() {
   }, []);
 
   return (
-    <AuthProvider>
-      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <>
         <ScrollToTop />
+        <SeoManager />
         <div className="w-full h-full">
             <Layout>
             <Routes>
@@ -74,7 +75,18 @@ function App() {
             </Routes>
           </Layout>
       </div>
-    </Router>
+    </>
+  );
+}
+
+// --- Main App Component ---
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <AppRoutes />
+      </Router>
     </AuthProvider>
   );
 }

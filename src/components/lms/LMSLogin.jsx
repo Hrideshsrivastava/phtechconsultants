@@ -7,7 +7,7 @@ const LMSLogin = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     
-    const { currentUser, loginWithGoogle } = useAuth();
+    const { currentUser, loading: authLoading, loginWithGoogle } = useAuth();
     const navigate = useNavigate();
 
     // Auto-redirect if already logged in (fixes the frozen sign-in button issue)
@@ -31,6 +31,9 @@ const LMSLogin = () => {
 
         setLoading(false);
     };
+
+    // Don't flash the sign-in card while Firebase is still restoring an existing session.
+    if (authLoading) return null;
 
     return (
         <div className="w-full flex flex-col items-center py-12 relative min-h-screen justify-center">

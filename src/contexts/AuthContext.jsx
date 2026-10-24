@@ -46,13 +46,15 @@ export const AuthProvider = ({ children }) => {
 
     const value = {
         currentUser,
+        loading,
         loginWithGoogle,
         logout
     };
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {/* Render straight away so public pages (and their pre-rendered HTML) never wait on Firebase. */}
+            {children}
         </AuthContext.Provider>
     );
 };

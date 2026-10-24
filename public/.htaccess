@@ -7,6 +7,11 @@
   # Doing so makes browsers report a misleading JavaScript MIME-type error.
   RewriteRule ^assets/ - [L]
 
+  # Serve pre-rendered pages for clean URLs, e.g. /services -> /services.html.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
